@@ -1,0 +1,40 @@
+public class Test02 {
+    public static void main(String[] args) {
+        String s = "LEETCODEISHIRING";
+        int num = 3;
+        String s1 = convert(s, num);
+        System.out.println(s1);
+    }
+    public static String convert(String s, int numRows) {
+        //如果只需要一行则直接返回本字符串
+        if( numRows == 1)
+            return s;
+        int temp = 2*numRows - 2;
+        StringBuilder str = new StringBuilder();
+        for(int i = 0; i < numRows; i++){
+            //第0行
+            if(i == 0){
+                for(int k = 0; k * temp < s.length(); k++){
+                    str.append(s.charAt(k*temp));
+                }
+            }
+            //第numRows-1行
+            else if(i == numRows -1){
+                for(int k = 0; k*temp+numRows-1 < s.length();k++){
+                    str.append(s.charAt(k*temp+numRows-1));
+                }
+            }
+            //中间行
+            else{
+                for(int k = 0; k*temp+i < s.length(); k++){
+                    str.append(s.charAt(k*temp+i));
+                    if((k+1)*temp -i < s.length()){
+                        str.append(s.charAt((k+1)*temp - i));
+                    }
+                }
+            }
+        }
+        return str.toString();
+    }
+
+}
