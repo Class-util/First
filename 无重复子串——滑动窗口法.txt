@@ -1,0 +1,33 @@
+import java.util.HashSet;
+import java.util.Set;
+
+public class Test05 {
+
+        public static void main(String[] args) {
+            String s ="abcabcbb";
+            int i = lengthOfLongestSubstring(s);
+            System.out.println(i);
+        }
+        private static int lengthOfLongestSubstring(String s) {
+                  Set<Character> set = new HashSet<Character>();
+                  //记录字符串长度
+                  int len = s.length();
+                  //定义指针
+                  int sign = -1;
+                  //max用来存储最大长度
+                  int max = 0;
+                  //循环遍历字符串
+            for (int i = 0; i < len; ++i) {
+                //
+                if(i!=0){
+                    set.remove(s.charAt(i-1));
+                }
+                while (sign + 1 < len && !set.contains(s.charAt(sign+1))){
+                    set.add(s.charAt(sign+1));
+                    ++sign;
+                }
+                max = Math.max(max,sign-i+1);
+            }
+                  return max;
+            }
+}
