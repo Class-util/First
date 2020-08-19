@@ -1,0 +1,22 @@
+
+public class Test01 {
+    public static void main(String[] args) {
+        int num = 124561;
+        boolean palindrome = isPalindrome(num);
+        System.out.println(palindrome);
+    }
+    public static boolean isPalindrome(int x) {
+     //分析所有情况
+     //负数不是回文数
+     //个位数为0的不是回文数（0除外）
+        if(x%10==0&&x!=0||x<0){
+        return false;
+        }
+        int flog = 0;
+        while (x>flog){
+            flog = flog *10 + x%10;
+            x/=10;
+        }
+        return x==flog||x==flog/10;
+    }
+}
