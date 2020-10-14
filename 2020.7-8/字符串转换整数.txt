@@ -1,0 +1,44 @@
+public class Test09 {
+    public static void main(String[] args) {
+        String s = " -42";
+        int i = myAtoi(s);
+        System.out.println(i);
+    }
+
+    public static int myAtoi(String str) {
+        int sign = 0;
+        int len = str.length();
+        char[] arr = str.toCharArray();
+        while (sign < len && arr[sign] == ' ') {
+            sign++;
+        }
+        //去掉空格直接到末尾
+        if (sign == len) {
+            return 0;
+        }
+        boolean b = false;
+        if (arr[sign] == '-') {
+            b = true;
+            sign++;
+        } else {
+            if (arr[sign] == '+') {
+                sign++;
+            } else if (!Character.isDigit(arr[sign])) {
+                // 其他符号
+                return 0;
+            }
+        }
+        int ans = 0;
+        while (sign < len && Character.isDigit(arr[sign])) {
+            int digit = arr[sign] - '0';
+            if (ans > (Integer.MAX_VALUE - digit) / 10) {
+                // 本来应该是 ans * 10 + digit > Integer.MAX_VALUE
+                // 但是 *10 和 + digit 都有可能越界，所有都移动到右边去就可以了。
+                return b? Integer.MIN_VALUE : Integer.MAX_VALUE;
+            }
+            ans = ans * 10 + digit;
+            sign++;
+        }
+        return b? -ans : ans;
+    }
+}

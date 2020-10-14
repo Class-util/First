@@ -1,0 +1,81 @@
+#define _CRT_SECURE_NO_WARNINGS 1
+#include "game.h"
+
+//菜单
+void meau(){
+	printf("******************************\n");
+	printf("*******   1. play      *******\n");
+	printf("*******   0. exit      *******\n");
+	printf("******************************\n");
+}
+
+//设计游戏
+void game(){
+	char ret = 0;
+	char arr[M][N];
+	//初始化数组
+	init(arr, M, N);
+	//打印棋盘
+	display(arr,M,N);
+
+	while (1){
+	   //玩家走
+		playermove(arr,M,N);
+		display(arr, M, N);
+		//判断输赢
+		ret =  checkwin(arr, M, N);
+		if (ret != 'n')
+			break;
+		//电脑走
+		computermove(arr, M, N);
+		display(arr, M, N);
+		//判断输赢
+		 ret =  checkwin(arr, M, N);
+		 if (ret != 'n')
+			 break;
+}
+	if (ret == '*')
+	{
+		printf("玩家赢\n");
+
+	}
+	else if (ret == '#')
+	{
+		printf("电脑赢\n");
+	}
+	else if (ret == 'q')
+	{
+		printf("平局\n");
+	}
+
+}
+
+
+int main(){
+	
+
+	int input = 0;
+
+	srand((unsigned int)time(NULL));
+
+	do{
+		meau();
+		printf("请选择:");
+		scanf("%d", &input);
+		switch (input){
+		case 1:
+			game();
+			break;
+		case 0:
+			printf("退出游戏\n");
+			break;
+		default:
+			printf("选择错误\n");
+		    break;
+		}
+	} while (input);
+
+
+	return 0;
+
+}

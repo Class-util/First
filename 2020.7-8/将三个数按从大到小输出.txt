@@ -1,0 +1,63 @@
+#define _CRT_SECURE_NO_WARNINGS 1
+
+#include<stdio.h>
+
+
+
+
+
+int main(){
+
+int a = 2;
+
+int b = 3;
+
+int c = 5;
+
+int flog = 0;
+
+
+
+if (a<b)
+
+{
+
+flog = a;
+
+a = b;
+
+b = flog;
+
+}
+
+if (a<c)
+
+{
+
+flog = a;
+
+a = c;
+
+c = flog;
+
+}
+
+if (b<c)
+
+{
+
+flog = b;
+
+b = c;
+
+c = flog;
+
+}
+
+printf("%d %d %d\n", a, b, c);
+
+
+
+return 0;
+
+}

@@ -1,0 +1,39 @@
+public class Test07 {
+    public static void main(String[] args) {
+        String s = "LEETCODEISHIRING";
+        int num = 4;
+        String convert = convert(s, num);
+        System.out.println(convert);
+    }
+    public static String convert(String s, int numRows) {
+        //判断要输出的行数，如果为一行则直接返回本字符串
+        if(numRows == 1)
+            return s;
+        //如果字符串长度过短，则输出的行数有可能达不到预期的行数，所以这里采取字符串长度和预期行数的最小值来创建数组空间
+        int len = Math.min(s.length(), numRows);
+        //创建字符型的数组
+        String []rows = new String[len];
+        //通过循环将，数组初始化
+        for(int i = 0; i< len; i++) rows[i] = "";
+        //loc代表数组的下标
+        int loc = 0;
+        //down表示是否向下走
+        boolean down = false;
+        //遍历字符串，并将元素添加进指定的位置
+        for(int i=0;i<s.length();i++) {
+            rows[loc] += s.substring(i,i+1);
+            //判断loc==0判断是否在第一行，loc==numRows-1判断是否在最后一行
+            if(loc == 0 || loc == numRows - 1)
+                //反转方向
+                down = !down;
+                //通过down的值来改变loc
+            loc += down ? 1 : -1;
+        }
+        //字符串拼接
+        String ans = "";
+        for(String row : rows) {
+            ans += row;
+        }
+        return ans;
+    }
+}
