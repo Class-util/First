@@ -1,0 +1,24 @@
+package Demo03;/*
+ *@Author：
+ *@Date:2020/10/20 16:37
+ */
+
+public class Test03 {
+    public static void main(String[] args) {
+        int[] arr = {1,2,3,4,4,3,2,1};
+        int n = 4;
+        int[] shuffle = shuffle(arr, n);
+        for (int i : shuffle) {
+            System.out.println(i);
+        }
+    }
+    public static int[] shuffle(int[] nums, int n) {
+        int index = 0;
+        int[] result = new int[nums.length];
+        for (int i = 0; i < n; i++) {
+            result[index++] = nums[i];
+            result[index++] = nums[n+i];
+        }
+        return result;
+    }
+}
