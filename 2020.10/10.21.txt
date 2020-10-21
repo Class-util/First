@@ -1,0 +1,60 @@
+#define _CRT_SECURE_NO_WARNINGS 1
+#include<stdio.h>
+#include<string.h>
+
+int my_strlen(const char * str){
+	int n = 0;
+	while (*str){
+		str++;
+			n++;
+	}
+	return n;
+}
+
+
+char* my_strcpy(char *str1,char *str2){
+
+	char* cur = str1;
+	while (*str2!='\0'){
+		*str1 = *str2;
+		str1++;
+		str2++;
+	}
+	*str1 = '\0';
+	return cur;
+}
+
+int my_strcmp(const char *str1,const char *str2){
+	
+	while (*str1++ == *str2++)
+	{
+		if (*str1 == '\0')
+			return 0;
+	}
+
+	if (*str1 - *str2) 
+		return 1;
+	else
+		return -1;
+	
+	return 0;
+}
+
+int main(){
+
+	/*char arr[] = "abcdefg";*/
+	/*int size = my_strlen(arr);*/
+	/*printf("%d\n",size);
+	printf("%d\n",strlen(arr))*/;
+
+	/*char str1[10];
+	char str2[10] = "China";
+	printf("%s\n", my_strcpy(str1, str2));*/
+
+	char * str1 = "abcde";
+	char * str2 = "abcdf";
+	printf("%d",my_strcmp(str1,str2));
+
+	return 0;
+	
+}
