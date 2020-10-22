@@ -1,0 +1,26 @@
+package Demo04;/*
+ *@Author：
+ *@Date:2020/10/22 16:26
+ */
+
+public class Test01 {
+    public static void main(String[] args) {
+        String J = "z", S = "ZZ";
+        int i = numJewelsInStones(J, S);
+        System.out.println(i);
+    }
+
+
+    public static int numJewelsInStones(String J, String S) {
+        int length = J.length();
+        int flog = 0;
+        for (int i = 0;i<=length-1;i++){
+            for (int n = 0; n <= S.length()-1; n++) {
+                if(J.charAt(i)==S.charAt(n)){
+                    flog++;
+                }
+            }
+        }
+        return flog;
+    }
+}
