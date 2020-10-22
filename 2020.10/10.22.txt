@@ -1,0 +1,19 @@
+package Demo04;/*
+ *@Author：
+ *@Date:2020/10/22 16:11
+ */
+
+public class ParkingSystem {
+
+    int[] ParkingSystem = new int[3];
+
+    public ParkingSystem(int big, int medium, int small) {
+        ParkingSystem[0] = big;
+        ParkingSystem[1] = medium;
+        ParkingSystem[2] = small;
+    }
+
+    public boolean addCar(int carType) {
+        return ParkingSystem[carType-1] -- > 0;
+    }
+}
