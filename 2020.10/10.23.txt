@@ -1,0 +1,22 @@
+package Demo04;/*
+ *@Author：
+ *@Date:2020/10/23 10:36
+ */
+
+public class Test03 {
+    public static void main(String[] args) {
+
+        int[] guess = {2,2,3};
+        int[] answer = {3,2,1};
+        int game = game(guess, answer);
+        System.out.println(game);
+    }
+    public static int game(int[] guess, int[] answer) {
+        int flag = 0;
+        for (int i = 0; i < guess.length; i++) {
+            if(guess[i]==answer[i])
+                flag++;
+        }
+        return flag;
+    }
+}
