@@ -1,0 +1,49 @@
+package Demo05;/*
+ *@Author：
+ *@Date:2020/10/24 15:22
+ */
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class Test02 {
+    public static void main(String[] args) {
+        int[] arr = {1, 1, 2, 3};
+        int[] nums = decompressRLElist(arr);
+        for (int num : nums) {
+            System.out.println(num);
+        }
+    }
+
+    //集合的效率比数组低
+    //    public static int[] decompressRLElist(int[] nums) {
+//        List<Integer> list = new ArrayList<>();
+//        for (int i = 0; i < nums.length-1; i=i+2) {
+//            for(int j = 1;j <= nums[i];j++){
+//                list.add(nums[i+1]);
+//            }
+//        }
+//        System.out.println(list);
+//        int [] a = new int[list.size()];
+//        for (int i = 0; i < a.length; i++) {
+//            a[i] = list.get(i);
+//        }
+//        return a;
+//    }
+//}
+    public static int[] decompressRLElist(int[] nums) {
+        int length = 0;
+        for (int i = 0; i < nums.length; i = i + 2) {
+            length = length + nums[i];
+        }
+        int[] a = new int[length];
+        int sign = 0;
+        for (int i = 0; i < nums.length - 1; i = i + 2) {
+            for (int j = 1; j <= nums[i]; j++) {
+                a[sign] = nums[i + 1];
+                sign++;
+            }
+        }
+        return a;
+    }
+}
