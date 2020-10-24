@@ -1,0 +1,30 @@
+package Demo05;/*
+ *@Author：
+ *@Date:2020/10/24 14:07
+ */
+
+public class Test01 {
+    public static void main(String[] args) {
+        String s = "(1+(2*3)+((8)/4))+1";
+        int i = maxDepth(s);
+        System.out.println(i);
+    }
+    public static int maxDepth(String s) {
+        int max = 0;
+        int sign = 0;
+        char[] chars = s.toCharArray();
+        for (int i = 0; i < chars.length; i++) {
+            if(chars[i]=='('){
+                sign++;
+            }else {
+                if(')'==chars[i]){
+                    if(max<sign){
+                        max = sign;
+                    }
+                    sign--;
+                }
+            }
+        }
+        return max;
+    }
+}
