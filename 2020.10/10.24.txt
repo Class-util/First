@@ -1,0 +1,46 @@
+package Demo04;/*
+ *@Author：
+ *@Date:2020/10/23 11:27
+ */
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
+
+public class Test06 {
+    public static void main(String[] args) {
+        System.out.println("请输入整数n：");
+        Scanner sc = new Scanner(System.in);
+        int i = sc.nextInt();
+        int i1 = subtractProductAndSum(i);
+        System.out.println(i1);
+    }
+    public static int subtractProductAndSum(int n) {
+//        List<Integer> list = new ArrayList();
+//        int flag = 0;
+//        while (n>0){
+//            flag = n%10;
+//            list.add(flag);
+//            n = n/10;
+//        }
+//        System.out.println(list);
+//        int x = 0;
+//        int y = 1;
+//        for (int i = 0; i < list.size(); i++) {
+//            x = x +  list.get(i);
+//            y = y *  list.get(i);
+//        }
+////        System.out.println(x);
+////        System.out.println(y);
+//        return y-x;
+        int x = 0;
+        int y = 1;
+        while (n>0){
+           int tmp = n%10;
+           x = x + tmp;
+            y = y * tmp;
+            n = n /10;
+        }
+        return y-x;
+    }
+}
