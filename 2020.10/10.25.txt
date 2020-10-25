@@ -1,0 +1,38 @@
+#define _CRT_SECURE_NO_WARNINGS 1
+#include<stdio.h>
+
+char* my_strcat(char*dest, const char*str){
+	char * ret = dest;
+	while (*dest){
+		dest++;
+	}
+	while (*dest++ = *str++){
+		;
+	}
+	return ret;
+}
+//char *my_strcat(char *dest, const char*src)
+//{
+//	char *ret = dest;
+//	
+//	while (*dest)
+//	{
+//		dest++;
+//	}
+//	while ((*dest++ = *src++))
+//	{
+//		;
+//	}
+//	*dest = "\n";
+//	return ret;
+//}
+
+int main(){
+	
+	char dest[20] = "hello";
+	char src[] = "world";
+
+	char * ret = my_strcat(dest,src);
+	printf("%s",ret);
+	return 0;
+}
