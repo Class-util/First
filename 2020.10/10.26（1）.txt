@@ -1,0 +1,71 @@
+#define _CRT_SECURE_NO_WARNINGS 1
+
+#include<stdio.h>
+#include<stdlib.h>
+#include<assert.h>
+
+
+void* memmove1(void* dest, const void* src, size_t count){	
+	void * ret = dest;
+	//断言ret和src指向不为空；
+	
+	//判断空间是否重叠
+	if (dest <= src || dest >= (char*)src + count){
+		//控制个数
+		while (count--){
+			//赋值并且移动指针
+			*(char*)dest = *(char*)src;
+			//向后移动
+			dest = (char*)dest + 1;
+			src = (char*)src + 1;
+		}
+	}
+	//空间重叠，从最后向前复制
+	else
+	{
+		//将指针移到末尾位置，从最后向前
+		dest = (char*)dest + count - 1;
+		src = (char*)src + count - 1;
+		while (count--){
+			//赋值并且移动指针
+			*(char*)dest = *(char*)src;
+			//向前移动
+			dest = *(char*)dest - 1;
+			src = *(char*)src - 1;
+		}
+	}
+	return ret;
+}
+
+void* Memmove(void* dest, const void* src, size_t count){
+	void* ret;
+	ret = dest;
+	assert(ret != NULL && src != NULL);  //断言ret和src的指向不为空
+	if (dest <= src || dest >= (char*)src + count){  //若dest和src的空间不重叠
+		while (count--){  //count减1
+			*(char*)dest = *(char*)src;  //将src的内容赋给dest
+			dest = (char*)dest + 1;  //dest向后移一位
+			src = (char*)src + 1;  //src向后移一位
+		}
+	}
+	else{
+		dest = (char*)dest + count - 1;  //dest向后移(count-1)位
+		src = (char*)src + count - 1;  //src向后移(count-1)位	
+		while (count--){  //当count不等于0
+			*(char*)dest = *(char*)src;  //将src的内容赋给dest
+			dest = (char*)dest - 1;  //dest向前移一位
+			src = (char*)src - 1;  //src向前移一位
+		}
+	}
+	return ret;
+}
+
+int main(){
+	char str[] = "abcde";
+	/*memmove(str, str + 3,2);*/
+	memmove1(str, str + 3, 2);  //调用Memmove函数
+	printf("%s\n", str);  //打印输出结果
+	
+
+	return 0;
+}
