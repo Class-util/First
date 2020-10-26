@@ -1,0 +1,32 @@
+package Demo05;/*
+ *@Author：
+ *@Date:2020/10/26 16:38
+ */
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Objects;
+
+public class Test03 {
+    public static void main(String[] args) {
+        int []nums = {0,1,2,3,4};
+        int []index = {0,1,2,2,1};
+        int[] arr = createTargetArray(nums, index);
+        for (int i : arr) {
+            System.out.println(i);
+        }
+    }
+    public static int[] createTargetArray(int[] nums, int[] index) {
+        for (int i = 0; i < index.length; i++) {
+            if (i > index[i]) {
+                int t = nums[i];
+                for (int j = i - 1; j >= index[i]; j--) {
+                    nums[j + 1] = nums[j];
+                }
+                nums[index[i]] = t;
+            }
+        }
+        return nums;
+    }
+}
