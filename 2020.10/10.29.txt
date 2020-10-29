@@ -1,0 +1,17 @@
+#define _CRT_SECURE_NO_WARNINGS 1
+
+#include<stdio.h>
+
+struct stu {
+	long int snum;
+	float c_great;
+	float m_great;
+	float e_great;
+};
+
+int main(){
+	struct stu s1;
+	scanf("%ld;%f,%f,%f", &s1.snum, &s1.c_great, &s1.m_great, &s1.e_great);
+	printf("The each subject score of  No. %ld is %.2f, %.2f, %.2f.\n", s1.snum, s1.c_great, s1.m_great, s1.e_great);
+	return 0;
+}
