@@ -4,13 +4,23 @@
 
 void ContactInit(ContactBook * pcb){
 	//初始化通信录
-	memset(pcb->contactArray,0,sizeof(Contact)*CTARRAY_MAX);
+	//动态分布内存空间
+	pcb->contactArray = (Contact*)malloc(sizeof(Contact)*CTARRY_SIZE);
+
+	memset(pcb->contactArray,0,sizeof(Contact)*CTARRY_SIZE);
 	pcb->size = 0;
+	pcb->capcity = CTARRY_SIZE;
 }
 
 void ContactAdd(ContactBook *pcb,Contact ct){
 	//断言
 	assert(pcb);
+	//扩容，动态分布内存空间
+	if (pcb->size >= pcb->capcity){
+		int newcapcity = pcb->capcity * 2;
+		pcb->contactArray = realloc(pcb->contactArray, newcapcity * sizeof(Contact));
+	}
+
 	//添加联系人
 	//方法一：一个一个考
 	/*strcpy(pcb->contactArray[pcb->size].name, ct.name);*/

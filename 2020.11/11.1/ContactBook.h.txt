@@ -4,11 +4,15 @@
 #include<stdio.h>
 #include<string.h>
 #include<assert.h>
+#include<stdlib.h>
 
 #define NAME_MAX 20
 #define TEL_MAX 20
 #define ADDR_MAX 40
+
 #define CTARRAY_MAX 1000
+#define CTARRY_SIZE 10
+
 //联系人信息
  typedef struct Contact
 {
@@ -22,8 +26,10 @@
 //通讯录
 typedef struct ContactBook
 {
-	Contact contactArray[CTARRAY_MAX];
+	Contact * contactArray;
 	int size;
+	//容量
+	int capcity;
 }ContactBook;
 
 //初始化通信录（注意需要参数应传入结构体指针，不然将无法初始化）
