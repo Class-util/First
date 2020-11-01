@@ -1,0 +1,76 @@
+#define _CRT_SECURE_NO_WARNINGS 1
+
+//typedef struct {
+//	float realpart;
+//	float imahpart;
+//}Complex;
+//
+////函数声明
+//Complex create(float x,float y);
+//Complex add(Complex z1, Complex z2);
+//
+////利用x，y创建复合数z，并将z返回
+//Complex create(float x,float y){
+//	Complex z;
+//	z.imahpart = x;
+//	z.realpart = y;
+//	return z;
+//}
+//
+//Complex add(Complex z1, Complex z2){
+//	Complex sum;
+//	sum.realpart = z1.realpart + z2.realpart;
+//	sum.imahpart = z1.imahpart + z2.imahpart;
+//	return sum;
+//}
+//
+//int main(){
+//	float a, b;
+//	Complex c1, c2, c3;
+//	printf("\n\n\n Input realpart and imagpart:");
+//	scanf("%f%f",&a,&b);
+//	c1 = create(a, b);
+//	return 0;
+//}
+
+#include<stdio.h>
+#define MAXSIZE 100
+
+
+typedef struct
+{
+	char elem[MAXSIZE];
+	int last;
+}SeqList;
+
+
+int Locate(SeqList L, char elem);
+
+int Locate(SeqList L, char elem){
+	int i = 0;
+	while ((i <= L.last) && (L.elem[i] != elem))
+		i++;
+	if (i<=L.last){
+		return i + 1;
+	}
+	else
+	{
+		return -1;
+	}
+}
+
+int main(){
+	
+	SeqList L = { "abcde", 5 };
+	char elem = 'e';
+	int i = Locate(L, elem);
+	if (i != -1){
+		printf("找到了，在第%d个位置\n",i);
+	}
+	else
+	{
+		printf("没找到\n");
+	}
+
+
+}
