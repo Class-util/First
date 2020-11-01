@@ -1,0 +1,44 @@
+//防止头文件被重复包含
+#pragma once
+
+#include<stdio.h>
+#include<string.h>
+#include<assert.h>
+
+#define NAME_MAX 20
+#define TEL_MAX 20
+#define ADDR_MAX 40
+#define CTARRAY_MAX 1000
+//联系人信息
+ typedef struct Contact
+{
+	char name[NAME_MAX];
+	char sex[2];
+	short age;
+	char tel[TEL_MAX];
+	char address[ADDR_MAX];
+}Contact;
+
+//通讯录
+typedef struct ContactBook
+{
+	Contact contactArray[CTARRAY_MAX];
+	int size;
+}ContactBook;
+
+//初始化通信录（注意需要参数应传入结构体指针，不然将无法初始化）
+void ContactInit(ContactBook * pcb);
+//添加联系人
+void ContactAdd(ContactBook * pcb,Contact ct);
+//删除联系人
+void ContactDel(ContactBook * pcb, const char * name);
+//查询联系人
+Contact * ContactSearch(ContactBook * pcb, const char * name);
+//更新联系人
+void ContactUpdate(ContactBook * pcb, Contact ct);
+
+//显示所有联系人信息
+void ContactAll(ContactBook * pcb);
+
+//清空联系人
+void ContactClear(ContactBook * pcb);

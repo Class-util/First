@@ -1,0 +1,72 @@
+#define _CRT_SECURE_NO_WARNINGS 1
+
+#include"ContactBook.h"
+
+void ContactInit(ContactBook * pcb){
+	//初始化通信录
+	memset(pcb->contactArray,0,sizeof(Contact)*CTARRAY_MAX);
+	pcb->size = 0;
+}
+
+void ContactAdd(ContactBook *pcb,Contact ct){
+	//断言
+	assert(pcb);
+	//添加联系人
+	//方法一：一个一个考
+	/*strcpy(pcb->contactArray[pcb->size].name, ct.name);*/
+	//方法二：按字节拷贝，使用memcpy
+	memcpy(pcb->contactArray + pcb->size, &ct, sizeof(Contact));
+	//移到下一个位置
+	pcb->size++;
+}
+
+Contact * ContactSearch(ContactBook * pcb, const char * name){
+	assert(pcb);
+	for (int  i = 0; i < pcb->size; i++)
+	{	
+		//完整查询
+		if (strcmp(pcb->contactArray[i].name, name)==0){
+			return (&pcb->contactArray[i]);
+		}
+		//关键字查询
+		if (strstr(pcb->contactArray[i].name, name)){
+			return (&pcb->contactArray[i]);
+		}
+	}
+	return	NULL;
+}
+
+void ContactUpdate(ContactBook * pcb,Contact ct){
+	memcpy(pcb->contactArray + pcb->size, &ct, sizeof(Contact));
+}
+
+
+void ContactDel(ContactBook * pcb, const char * name){
+	for (int i = 0; i < pcb->size; ++i)
+	{
+		if (strcmp(pcb->contactArray[i].name, name) == 0){
+			memmove(pcb->contactArray + i,pcb->contactArray +i+1,sizeof(Contact)*(pcb->size)-(i+1));
+		}
+		memset(pcb->contactArray + pcb->size - 1, 0, sizeof(Contact));
+		break;
+	}
+	pcb->size--;
+}
+
+//void ContactDel(ContactBook * pcb, Contact ct){
+//	memcpy(pcb->contactArray + pcb->size, &ct, sizeof(Contact));
+//	pcb++;
+//}
+
+void ContactClear(ContactBook * pcb){
+	//清零
+	memset(pcb->contactArray, 0, sizeof(Contact)*CTARRAY_MAX);
+	pcb->size = 0;
+}
+
+void ContactAll(ContactBook * pcb){
+	for (int i = 0; i < pcb->size; i++)
+	{
+		printf("%s,%s,%d,%s,%s\n", pcb->contactArray[i].name, pcb->contactArray[i].sex, pcb->contactArray[i].age, pcb->contactArray[i].tel,pcb->contactArray[i].address);
+	}
+}
