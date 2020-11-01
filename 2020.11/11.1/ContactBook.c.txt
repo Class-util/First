@@ -19,7 +19,9 @@ void ContactAdd(ContactBook *pcb,Contact ct){
 	if (pcb->size >= pcb->capcity){
 		int newcapcity = pcb->capcity * 2;
 		pcb->contactArray = realloc(pcb->contactArray, newcapcity * sizeof(Contact));
+		pcb->capcity = newcapcity;
 	}
+	    
 
 	//添加联系人
 	//方法一：一个一个考
