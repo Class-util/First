@@ -1,0 +1,75 @@
+#define _CRT_SECURE_NO_WARNINGS 1
+
+#include<stdio.h>
+
+#define MAXSIZE 50
+
+typedef struct{
+	int elem[MAXSIZE];
+	int last;
+}SeqList;
+
+//线性表的合并操作
+void mergeList(SeqList * LA, SeqList * LB, SeqList * LC){
+	//初始化，i控制LA，j控制LB，k控制LC
+	int i, j, k;
+	i = 0;
+	j = 0;
+	k = 0;
+	//当LA和LB中都走到结尾循环才能结束
+	while (i <= LA->last &&j <= LB->last){
+		//如果LA中的元素小于等于LB则添加LA的元素
+		if (LA->elem[i] <= LB->elem[i]){
+			//添加元素
+			LC->elem[k] = LA->elem[i];
+			//移动下标，LA和LC都要移动
+			i++;
+			k++;
+		}
+		//LB小于LA则添加LB的元素
+		else
+		{
+			//添加元素
+			LC->elem[k] = LB->elem[j];
+			//移动LB和LC的下标
+			j++;
+			k++;
+		}
+		//如果LA中还有剩余元素，则添加完所有元素
+		while (i <= LA->last){
+			LC->elem[k] = LA->elem[i];
+			i++;
+			k++;
+		}
+		//如果LB中还有剩余元素，则添加完所有元素；
+		while (j <= LB->last){
+			LC->elem[k] = LB->elem[j];
+			j++;
+			k++;
+		}
+	}
+	//更新LC的last大小
+	LC->last = LA->last + LB->last + 1;
+}
+
+int main(){
+
+	SeqList A = { { 2, 2, 3 }, 2 };
+	SeqList B = { { 1, 3, 3 ,4 }, 3 };
+	SeqList C;
+
+	SeqList * LA = &A;
+	SeqList * LB = &B;
+	SeqList * LC = &C;
+
+	mergeList(LA, LB, LC);
+
+	for (int i = 0; i <= LC->last; i++)
+	{
+		printf("%d", LC->elem[i]);
+	}
+
+
+
+	return 0;
+}
