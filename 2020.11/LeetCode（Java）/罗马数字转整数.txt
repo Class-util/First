@@ -1,0 +1,48 @@
+package Demo06;/*
+ *@Author：
+ *@Date:2020/11/2 20:30
+ */
+
+public class Test02 {
+    public static void main(String[] args) {
+        String s = "IIIV";
+        int i = romanToInt(s);
+        System.out.println(i);
+    }
+    public static int romanToInt(String s) {
+        //定义sum记录罗马数字转换过来的整数
+        int sum = 0;
+        //取第一个罗马数字的整数值
+        int getvalue = getvalue(s.charAt(0));
+        for (int i = 1; i < s.length(); i++) {
+            //记录getvalue后的下一个值
+            int num = getvalue(s.charAt(i));
+            //次循环所有的运算只跟每次的前者值有关，也就是getvalue的值，num作为后者值只参与比较，和传递，不直接参与运算
+            //比较二者，如果前>=后，则应 加上，如果前<后，则应该减去
+            if(getvalue < num){
+                sum -= getvalue;
+            }else {
+                sum += getvalue;
+            }
+            //进入下一次的比较，将本次的后者赋值给下一次的前者
+            getvalue = num;
+        }
+        //循环结束后，发现少运算一次，所以手动添加最后一次的后者数
+        sum +=getvalue;
+        return sum;
+    }
+
+    public static int getvalue(char c){
+        switch(c){
+            case 'I': return 1;
+            case 'V': return 5;
+            case 'X': return 10;
+            case 'L': return 50;
+            case 'C': return 100;
+            case 'D': return 500;
+            case 'M': return 1000;
+            default: return 0;
+        }
+    }
+
+}
