@@ -1,0 +1,46 @@
+//插入运算
+int InsList(SeqList *L,int i ,char elem){
+	//判断插入位置是否合法
+	//L->last+2,last代表最后一个元素的下标，+1代表表长，再+1代表最后一个元素的下一个位置
+	if (i<0 || i>L->last+2){
+		printf("插入位置不合法");
+		return 0;
+	}
+	//判断表是否满
+	if (L->last == MAXSIZE - 1){
+		printf("表已满，无法插入");
+		return 0;
+	}
+	//插入操作
+	//将元素向后移，为插入元素留出位置
+	for (int k = L->last; k>=i-1; k--)
+	{
+		L->elem[k + 1] = L->elem[k];
+	}
+	//将元素插入指定位置
+	L->elem[i - 1] = elem;
+	//因为插入了一个元素，所以长度变化了，末尾位置+1
+	L->last++;
+	return 1;
+}
+
+int main(){
+	
+	SeqList L = { "abcde", 4 };
+	char elem = 'e';
+	/*int i = Locate(L, elem);
+	if (i != -1){
+		printf("找到了，在第%d个位置\n",i);
+	}
+	else
+	{
+		printf("没找到\n");
+	}*/
+
+	SeqList * pl = &L;
+
+	int a = InsList(pl, 3, elem);
+	printf("%s\n",L.elem);
+
+
+}
