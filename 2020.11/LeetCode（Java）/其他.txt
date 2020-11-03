@@ -1,0 +1,60 @@
+package Demo06;/*
+ *@Author：
+ *@Date:2020/11/3 10:51
+ */
+
+public class Test03 {
+    public static void main(String[] args) {
+        String[] s = {"cir","car"};
+//        String[] s = {};
+        String s1 = longestCommonPrefix(s);
+        System.out.println(s1);
+
+    }
+    public static String longestCommonPrefix(String[] strs) {
+       if(strs.length!=0){
+           int min = strs[0].length();
+           int flog = strs.length;
+           String s = "";
+           //获取字符串的最小长度
+           for (int i = 1; i < strs.length; i++) {
+               if(min > strs[i].length()){
+                   min = strs[i].length();
+               }
+           }
+           //判断共同前缀的位数
+           int sign = 0;
+           for (int k = 0; k < min; k++) {
+
+               if(strs.length>=3){
+               for (int i = 0; i < flog-2; i++) {
+                   if (strs[i].charAt(k) == strs[i + 1].charAt(k) && strs[i + 1].charAt(k) == strs[i + 2].charAt(k)) {
+                       sign++;
+                   }
+               }
+
+         }else {
+                   if(strs.length==1){
+                       return strs[0];
+                   }else {
+                       if(strs[0].charAt(k)==strs[1].charAt(k)){
+                           sign++;
+                       }
+                   }
+
+               }
+           }
+
+
+           if(sign==0){
+               return "";
+           }else {
+               for (int j = 0; j < sign; j++) {
+                   s += strs[0].charAt(j);
+               }
+           }
+           return s;
+       }
+        return "";
+    }
+}
