@@ -1,0 +1,48 @@
+package Demo06;/*
+ *@Author：
+ *@Date:2020/11/3 14:10
+ */
+
+public class Test04 {
+    public static void main(String[] args) {
+        String[] s = {"cir","car"};
+//        String[] s = {};
+        String s1 = longestCommonPrefix(s);
+        System.out.println(s1);
+    }
+    public static String longestCommonPrefix(String[] strs) {
+
+        //如果字符数组为空，或者长度为0。直接返回空
+        if(strs ==null||strs.length==0){
+            return "";
+        }
+        //记录数组长度
+        int length = strs.length;
+        //定义sign存储第一个元素
+        String sign = strs[0];
+
+        for (int i = 0; i < length; i++) {
+            //每次都用两个字符串中相同的部分去跟下一个字符串进行比较，并将他们的相同部分或取出来，在进行比较，知道循环结束
+            sign = AAA(sign, strs[i]);
+            //如果相同部分的字符串长度为0，说明没有公共部分，直接跳出循环
+            if(sign.length()==0){
+                break;
+            }
+        }
+        return sign;
+    }
+        //定义函数，用来返回两个字符串中相同的部分
+    public static String AAA(String str1,String str2){
+        //代表索引值
+        int index = 0;
+        //取两个字符串中长度较小的那个当做循环条件，因为是按字符匹配，所有循环次数不能超过长度较小的子串的长度
+        int min = Math.min(str1.length(), str2.length());
+        //索引值合法时，并且两个串中相同索引的字符也相同，则移动索引值到下一个位置
+        while(index<min && str1.charAt(index)==str2.charAt(index)){
+            index++;
+        }
+        //返回两个字符串中相同的部分
+        return str1.substring(0,index);
+    }
+
+}
