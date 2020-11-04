@@ -1,0 +1,31 @@
+package Demo06;/*
+ *@Author：
+ *@Date:2020/11/4 16:49
+ */
+
+public class Test06 {
+    public static void main(String[] args) {
+        int[] num = {0,0,1,1,1,2,2,3,3,4};
+        int i = removeDuplicates(num);
+        for (int j = 0; j < i; j++) {
+            System.out.println(num[j]);
+        }
+    }
+    public static int removeDuplicates(int[] nums) {
+        //如果数组为空或长度为0直接返回0
+        if(nums.length==0)
+        return 0;
+        //定义第一个指针，用来指向未重复的元素,将他们放到开头的位置,并且还起到计数的作用
+        int i = 0;
+        //定义第二个指针，用来指向所有元素，为遍历和元素交换做标记
+        for (int j = 1; j < nums.length; j++) {
+            //判断如果nums[i]和nums[j]相同，则只移动j指向的位置
+            //如果不相等，则先移动i的位置，并且将nums[j]的值赋值给nums[i]
+            if(nums[i]!=nums[j]){
+                i++;
+                nums[i] = nums[j];
+            }
+        }
+        return i+1;
+    }
+}
