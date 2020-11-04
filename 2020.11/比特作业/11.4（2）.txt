@@ -1,0 +1,36 @@
+int my_atoi(char *str){
+	//存储转换过来的整数
+	long num = 0;
+	//记录符号位
+	int flog = 1;
+	if (str == NULL){
+		printf("str is null\n");
+		return 0;
+	}
+		//跳过空格
+		while (*str == ' '){
+			str++;
+		}
+		if (*str == '-'){
+			flog = -1;
+			str++;
+		}
+		//利用循环，将数字加起来
+		while ((*str >= '0') && (*str <= '9'))
+		{
+			num = num * 10 + *str - '0';
+			str++;
+		}
+		return (flog * num);
+	}
+
+
+
+
+int main(){
+	char* str = "   -123456";
+	int tmp = my_atoi(str);
+	
+	printf("%d\n", tmp);
+	return 0;
+}
