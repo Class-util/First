@@ -1,0 +1,28 @@
+#define _CRT_SECURE_NO_WARNINGS 1
+#include<stdio.h>
+
+void Search(int *p,int size){
+	for (int i = 0; i < size; i++)
+	{
+		int sign = 0;
+		for (int j = 0; j < size; j++)
+		{
+			if (*(p + i) == *(p + j)){
+				sign++;
+			}
+		}
+		if (sign == 1){
+			printf("%d\n", *(p + i));
+		}
+	}
+}
+
+
+int main(){
+
+	int arr[] = {0,0,1,1,2,3,2,3,4,5};
+	int i = sizeof(arr)/4;
+	Search(arr,i);
+
+	return 0;
+}
