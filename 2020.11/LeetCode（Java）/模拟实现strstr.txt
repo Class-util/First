@@ -1,0 +1,24 @@
+package Demo07;/*
+ *@Author：
+ *@Date:2020/11/7 17:00
+ */
+
+public class Test02 {
+    public static void main(String[] args) {
+        String s = "hello";
+        String n = "ll";
+        int i = strStr(s, n);
+        System.out.println(i);
+    }
+    public static int strStr(String haystack, String needle) {
+        int L = needle.length(), n = haystack.length();
+        //总共需要比较n-l次
+        for (int start = 0; start < n - L + 1; ++start) {
+            //直接生成haystack指定位置的子串，将其与needle进行比较
+            if (haystack.substring(start, start + L).equals(needle)) {
+                return start;
+            }
+        }
+        return -1;
+    }
+}
