@@ -1,0 +1,42 @@
+package Demo07;/*
+ *@Author：
+ *@Date:2020/11/9 19:27
+ */
+
+public class Test06 {
+    public static void main(String[] args) {
+        String s = "          ";
+        int i = lengthOfLastWord(s);
+        System.out.println(i);
+    }
+    public static int lengthOfLastWord(String s) {
+        int sign = 0;
+        //字符串为空。直接返回0
+        if(s==null)
+            return 0;
+        int flag = 0;
+        //判断字符串中几个空格
+        for (int i = 0; i < s.length(); i++) {
+            if(s.charAt(i)==' ')
+                flag++;
+        }
+        //如果结尾是空格，则直接返回1
+//        if(s.endsWith(String.valueOf(' '))){
+//            return 1;
+//        }
+
+
+        if(flag!=0){
+            for (int j = s.length()-1; j > 0; j--) {
+                if(s.charAt(j)!=' '){
+                    sign++;
+                }else {
+                    break;
+                }
+            }
+        }else {
+            return s.length();
+        }
+        return sign;
+    }
+}
