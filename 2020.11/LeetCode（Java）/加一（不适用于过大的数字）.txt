@@ -1,0 +1,66 @@
+package Demo08;/*
+ *@Author：
+ *@Date:2020/11/10 14:17
+ */
+
+import java.lang.invoke.VarHandle;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
+public class Test01 {
+    public static void main(String[] args) {
+        int []nums = {9,8,7,6,5,4,3,2,1,0};
+        int[] ints = plusOne(nums);
+//        for (int i : ints) {
+//            System.out.println(i);
+//        }
+    }
+    public static int[] plusOne(int[] digits) {
+//        //判断数组长度
+//        if(digits.length==1){
+//            //如果长度为1，则判断元素是否为9
+//            if(digits[0]==9){
+//                //如果为9则新建数组，数组长度为原数组长度加一
+//                int []arr = new int[digits.length+1];
+//                arr[0] = 1;
+//                arr[1] = 0;
+//                return arr;
+//            }else {
+//                //如果不为9，则在原数上加1
+//                digits[0] = digits[0] + 1;
+//            }
+//        }else {
+//            //如果长度不为0
+//            //判断每一位是否为9
+//            for (int i = 0; i < digits.length; i++) {
+//                if(digits[i]!=9){
+//                    digits[i] = digits[i] + 1;
+//                }
+//            }
+//        }
+
+        //先将数组中的数字转化为整数
+        int num = digits[digits.length-1];
+        if(digits.length!=1){
+            int i = 1;
+            for (int length = digits.length-2; length >= 0; length--) {
+                num = (int) (digits[length]*(Math.pow(10,i)) +num);
+                i++;
+            }
+        }
+        //完成加一操作
+        num = num + 1;
+        System.out.println(num);
+        //将每位数存储到数组中，采用集合转数组的方式
+        List<Integer> list = new ArrayList<>();
+        while (num!=0){
+            list.add(num%10);
+            num = num/10;
+        }
+
+        Collections.reverse(list);
+        int[] arr = list.stream().mapToInt(Integer::intValue).toArray();
+        return arr;
+    }
+}
