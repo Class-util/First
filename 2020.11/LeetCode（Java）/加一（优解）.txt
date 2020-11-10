@@ -1,0 +1,30 @@
+package Demo08;/*
+ *@Author：
+ *@Date:2020/11/10 15:58
+ */
+
+public class Test02 {
+    public static void main(String[] args) {
+        int []nums = {1,2,3};
+        plusOne(nums);
+    }
+    public static int[] plusOne(int[] digits) {
+        int len = digits.length;
+        for (int i = len-1; i >= 0; i--) {
+            //将最后一个元素加一
+            digits[i]++;
+            //最后一个元素对10求余，进位的话变成0，没有进位则还是其本身
+            digits[i]%=10;
+            //如果余数不等于0，说明没有进位，直接返回数组即可（因为已经完成最后一位的加一操作了）
+            if(digits[i]!=0){
+                return digits;
+            }
+        }
+        //如果发生了每一位都进位对的情况，首先通过上面的循环给每一位加一
+        //接着重新开辟空间，比原来多一位
+        //将首元素赋值为1即可（其他位的0在循环中已经赋值好了）
+        digits = new int[len+1];
+        digits[0] = 1;
+        return digits;
+    }
+}
