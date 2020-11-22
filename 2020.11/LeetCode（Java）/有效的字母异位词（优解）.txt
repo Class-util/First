@@ -1,0 +1,44 @@
+package Demo08;/*
+ *@Author：
+ *@Date:2020/11/22 19:24
+ */
+
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.Arrays;
+
+public class Test05 {
+    public static void main(String[] args) {
+        String s = "aaaccc";
+        String t = "aacccc";
+        boolean anagram = isAnagram(s, t);
+        System.out.println(anagram);
+
+    }
+    public static boolean isAnagram(String s, String t) {
+        if(s.length()!=t.length())
+            return false;
+//        //排序比较数组是否相同
+//        char[] sa = s.toCharArray();
+//        char[] ta = t.toCharArray();
+//        Arrays.sort(sa);
+//        Arrays.sort(ta);
+//
+//        return Arrays.equals(sa,ta);
+        //哈希数组
+        //开辟26个字母的空间
+        int[] arr = new int[26];
+        //利用编码表进行初始化，数组包含的字符串，如b，就可以进行‘b’-‘a’，在一的位置初始化为1
+        for (int i = 0; i < s.length(); i++) {
+            arr[s.charAt(i)-'a']++;
+        }
+        //如果存在相同元素，则在对应位置-1，并且判断是否小于0，如果小于0说明另一个字符串中没有此字符，变相的起到了计数的作用
+        for (int i = 0; i < t.length(); i++) {
+            arr[t.charAt(i)-'a']--;
+            if(arr[t.charAt(i)-'a']<0){
+                return false;
+            }
+        }
+        return true;
+    }
+}
