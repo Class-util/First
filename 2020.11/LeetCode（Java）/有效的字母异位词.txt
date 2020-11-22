@@ -1,0 +1,42 @@
+package Demo08;/*
+ *@Author：
+ *@Date:2020/11/22 13:56
+ */
+
+import java.util.ArrayList;
+
+public class Test04 {
+    public static void main(String[] args) {
+        String s = "aaaccc";
+        String t = "aacccc";
+        boolean anagram = isAnagram(s, t);
+        System.out.println(anagram);
+    }
+    public static boolean isAnagram(String s, String t) {
+        //长度不相等直接返回false
+        if(s.length()!=t.length())
+            return false;
+        //两种情况，存在其他字符，如果存在其他字符直接返回false
+        //计算字符串的ascll值
+        ArrayList list = new ArrayList();
+        //将t字符串添加进list集合
+        for (int i = 0; i < t.length(); i++) {
+            list.add(t.charAt(i));
+        }
+        //判断是否有其他字符
+        for (int i = 0; i < s.length(); i++) {
+            if(!list.contains(s.charAt(i)))
+                return false;
+        }
+        //计算字符串的ascll值，不存在字符串包含字符范围之外的字符，所以计算出来的值如果是异位词则相同，不是则不相同
+        int sum1 = 0;
+        int sum2 = 0;
+        for (int i = 0; i < s.length(); i++) {
+            sum1 += (s.charAt(i));
+        }
+        for (int i = 0; i < t.length(); i++) {
+            sum2 += (t.charAt(i));
+        }
+        return sum1 == sum2;
+    }
+}
