@@ -1,1 +1,2 @@
-123
+[credential]
+	helper = manager
