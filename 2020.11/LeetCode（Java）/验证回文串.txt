@@ -1,0 +1,68 @@
+package Demo08;/*
+ *@Author：
+ *@Date:2020/11/24 15:32
+ */
+
+import java.util.Objects;
+
+public class Test08 {
+    public static void main(String[] args) {
+        String s = "0P";
+        boolean b = isPalindrome(s);
+        System.out.println(b);
+    }
+
+    public static boolean isPalindrome(String s) {
+        if(s==null|| Objects.equals(s, ""))
+            return true;
+        //将字符串变成只有小写
+        String str = s.toLowerCase();
+        //定义左右指针
+        int left = 0;
+        int right = str.length() - 1;
+        int len = str.length();
+        char sl;
+        char sr;
+                //左右指针相等结束循环
+                while (!(left == right)) {
+//                    if(left>=right)
+//                        return false;
+                    //判断字符是否在26字母范围内，如果不在则右移指针
+                    sl = str.charAt(left);
+                    sr = str.charAt(right);
+                    //如果出现指针越界异常，则直接返回true，因为字符串可能不包含字母或数字只有标点符号
+                    try {
+                        //如果不是字母则需要进入循环移动左指针
+                        while (sl < 97 || sl > 122) {
+                            //如果发现是数字则跳出，不移动
+                            if(sl >= 48 && sl <= 57)
+                                break;
+                            left++;
+                            sl = str.charAt(left);
+                        }
+                        //如果不是字母则需要进入循环移动右指针
+                        while (sr < 97 || sr > 122) {
+                            //如果发现是数字则跳出，不移动
+                            if(sr >= 48 && sr <= 57)
+                                break;
+                            right--;
+                            sr = str.charAt(right);
+                        }
+                    }catch (Exception e){
+                        return true;
+                    }
+                    //如果左指针大于右指针，则说明之前那比较的部分都相同，左指针大于右指针的原因是循环跳标点符号，跳过头了，直接返回true
+                    if (left >= right) {
+                        return true;
+                    }
+                    //比较指针位置字符是否相同
+                        if (sr != sl) {
+                            return false;
+                        }
+                    //移动指针，推动循环
+                        left++;
+                        right--;
+                    }
+        return true;
+    }
+}
