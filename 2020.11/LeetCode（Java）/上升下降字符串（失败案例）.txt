@@ -1,0 +1,91 @@
+package Demo09;/*
+ *@Author：
+ *@Date:2020/11/25 17:13
+ */
+
+public class Test02 {
+    public static void main(String[] args) {
+        String s = "rat";
+        String str = sortString(s);
+        System.out.println(str);
+    }
+    public static String sortString(String s) {
+        StringBuilder fun = new StringBuilder(fun(s));
+        int fun_s = fun.length();
+        while (fun_s!=s.length()){
+            fun.append(fun(s));
+            fun_s = fun.length();
+        }
+        return fun.toString();
+    }
+
+    public static String fun(String s){
+        int len = s.length()-1;
+        //结果字符串
+        StringBuilder str = new StringBuilder();
+        char c = search_min_char(s);
+        str.append(c);
+        char sign ;
+        int i = 0;
+        //步骤123
+//        1.从 s中选出 最小的字符，将它 接在结果字符串的后面。
+//        2.从 s剩余字符中选出最小的字符，且该字符比上一个添加的字符大，将它 接在结果字符串后面。
+//        3.重复步骤 2 ，直到你没法从 s中选择字符。
+        while (i!=len){
+            String sb = s.substring(i,len);
+            sign = search_min_char(sb);
+            if(sign == str.charAt(str.length()-1)){
+                i++;
+                continue;
+            }
+            str.append(sign);
+            i++;
+        }
+        if(str.length()==s.length()){
+            return str.toString();
+        }
+        //步骤456
+//        从 s中选出 最大的字符，将它 接在结果字符串的后面。
+//        从 s剩余字符中选出最大的字符，且该字符比上一个添加的字符小，将它 接在结果字符串后面。
+//        重复步骤 5，直到你没法从 s中选择字符。
+
+        StringBuilder str1 = new StringBuilder();
+        char x = search_max_char(s);
+        str1.append(x);
+        int j = 0;
+        while (j!=len){
+            String sb = s.substring(j,len);
+            sign = search_max_char(sb);
+            if(sign == str1.charAt(str1.length()-1)){
+                len--;
+                continue;
+            }
+            str1.append(sign);
+            len--;
+        }
+
+        return str.toString()+str1.toString();
+    }
+
+
+    //寻找字符串最小值
+    public static char search_min_char(String s){
+        char a = s.charAt(0);
+        for (int i = 1; i < s.length(); i++) {
+            if (s.charAt(i) < a) {
+                a = s.charAt(i);
+            }
+        }
+        return a;
+    }
+    //寻找字符串最小值
+    public static char search_max_char(String s){
+        char a = s.charAt(0);
+        for (int i = 1; i < s.length(); i++) {
+            if (s.charAt(i) > a) {
+                a = s.charAt(i);
+            }
+        }
+        return a;
+    }
+}
