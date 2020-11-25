@@ -1,0 +1,35 @@
+package Demo09;/*
+ *@Author：
+ *@Date:2020/11/25 19:38
+ */
+
+public class Test03 {
+    public static void main(String[] args) {
+        String s = "rat";
+        String str = sortString(s);
+        System.out.println(str);
+    }
+    public static String sortString(String s) {
+        int[] num = new int[26];
+        for (int i = 0; i < s.length(); i++) {
+            num[s.charAt(i) - 'a']++;
+        }
+
+        StringBuffer ret = new StringBuffer();
+        while (ret.length() < s.length()) {
+            for (int i = 0; i < 26; i++) {
+                if (num[i] > 0) {
+                    ret.append((char) (i + 'a'));
+                    num[i]--;
+                }
+            }
+            for (int i = 25; i >= 0; i--) {
+                if (num[i] > 0) {
+                    ret.append((char) (i + 'a'));
+                    num[i]--;
+                }
+            }
+        }
+        return ret.toString();
+    }
+}
