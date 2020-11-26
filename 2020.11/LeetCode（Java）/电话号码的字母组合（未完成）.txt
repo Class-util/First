@@ -1,0 +1,46 @@
+package Demo09;/*
+ *@Author：
+ *@Date:2020/11/26 20:41
+ */
+
+import java.util.ArrayList;
+import java.util.List;
+
+
+public class Test06 {
+    public static void main(String[] args) {
+       String s = "23";
+        List<String> list = letterCombinations(s);
+        System.out.println(list);
+
+    }
+    public static List<String> letterCombinations(String digits) {
+        List<String> list = new ArrayList<>();
+        List<String> str = new ArrayList<>();
+        int len = digits.length();
+        for (int i = 0; i < len; i++) {
+                String a = fun(digits.charAt(i));
+                str.add(a);
+            }
+        int len_str = str.size();
+        while (len_str!=0){
+            
+            len_str--;
+        }
+
+        return list;
+    }
+    public static String fun(char c){
+        switch (c){
+            case '2' : return "abc";
+            case '3' : return "def";
+            case '4' : return "ghi";
+            case '5' : return "jkl";
+            case '6' : return "mno";
+            case '7' : return "pqrs";
+            case '8' : return "tuv";
+            case '9' : return "wxyz";
+            default: return null;
+        }
+    }
+}
