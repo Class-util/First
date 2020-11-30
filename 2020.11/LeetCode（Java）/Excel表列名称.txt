@@ -1,0 +1,21 @@
+package Demo09;/*
+ *@Author：
+ *@Date:2020/11/30 17:35
+ */
+
+public class Test09 {
+    public static void main(String[] args) {
+        int n = 702;
+        String s = convertToTitle(n);
+        System.out.println(s);
+    }
+    public static String convertToTitle(int n) {
+        StringBuilder stringBuilder = new StringBuilder();
+        while (n != 0) {
+            n--; // 依次获取 26 进制逻辑上的个位、十位、百位…（虽然在 26 进制中不这么叫）
+            stringBuilder.append((char) ('A' + n % 26));
+            n /= 26;
+        }
+        return stringBuilder.reverse().toString();
+    }
+}
