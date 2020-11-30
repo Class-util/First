@@ -1,0 +1,31 @@
+package Demo09;/*
+ *@Author：
+ *@Date:2020/11/30 16:55
+ */
+
+import java.util.Arrays;
+
+public class Test07 {
+    public static void main(String[] args) {
+        int[] arr = {3,24,50,79,88,150,345};
+        int sign = 200;
+        int[] num = twoSum(arr, sign);
+        for (int i : num) {
+            System.out.println(i);
+        }
+    }
+    public static int[] twoSum(int[] numbers, int target) {
+        int[] nums = new int[2];
+        for (int j = numbers.length - 1; j >= 0; j--) {
+            int sign =  target - numbers[j];
+            for (int i = 0; i < j; i++) {
+                if(numbers[i] == sign){
+                    nums[0] = i+1;
+                    nums[1] = j+1;
+                }
+            }
+        }
+
+        return nums;
+    }
+}
