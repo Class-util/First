@@ -1,0 +1,32 @@
+package Demo10;/*
+ *@Author：
+ *@Date:2020/12/1 8:21
+ */
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class Test01 {
+    public static void main(String[] args) {
+        int[] arr = {5,7,7,8,8,10};
+        int target = 8;
+        int[] nums = searchRange(arr, target);
+        for (int num : nums) {
+            System.out.println(num);
+        }
+    }
+    public static int[] searchRange(int[] nums, int target) {
+        int[] num = new int[2];
+        if(nums.length<2){
+            num[0] = -1;
+            num[1] = -1;
+        }
+        List<Integer> list = new ArrayList();
+        for (int i : nums) {
+            list.add(i);
+        }
+        num[0] = list.indexOf(target);
+        num[1] = list.lastIndexOf(target);
+        return num;
+    }
+}
