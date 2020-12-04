@@ -1,0 +1,27 @@
+package Demo10;
+
+import java.util.Arrays;
+
+/**
+ * Created with IntelliJ IDEA.
+ * Description:
+ * User:吴博
+ * Date:2020 12 04
+ * Time:9:13
+ */
+public class Test05 {
+    public static void main(String[] args) {
+        int[] arr = {3, 2, 3};
+        int i = majorityElement(arr);
+        System.out.println(i);
+    }
+// 题目要求：多数元素指的是出现次数大于 nums.length/2的元素
+// 所以两个极端情况，一个是刚过nums.length/2的位置
+// 一个是所有元素都是同一元素
+// 会发现这两种极端情况在排完序后，在nums.length/2处有重合，都是出现最多的那个元素
+//注意：这是建立在按正序或逆序排序的基础上，才有此方法。
+    public static int majorityElement(int[] nums) {
+        Arrays.sort(nums);
+        return nums[nums.length / 2];
+    }
+}
