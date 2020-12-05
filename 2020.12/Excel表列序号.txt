@@ -1,0 +1,24 @@
+package Demo10;
+
+/**
+ * Created with IntelliJ IDEA.
+ * Description:
+ * User:吴博
+ * Date:2020 12 05
+ * Time:21:58
+ */
+public class Test06 {
+    public static void main(String[] args) {
+        String str = "AAA";
+        int i = titleToNumber(str);
+        System.out.println(i);
+    }
+    public static int titleToNumber(String s) {
+        int sign = 0;
+        for (int i = 0; i < s.length(); i++) {
+            int num = s.charAt(i) - 'A' + 1;
+            sign = sign * 26 + num;
+        }
+        return sign;
+    }
+}
