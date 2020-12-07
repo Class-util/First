@@ -1,0 +1,31 @@
+package Demo11;
+
+/**
+ * Created with IntelliJ IDEA.
+ * Description:
+ * User:吴博
+ * Date:2020 12 07
+ * Time:22:21
+ */
+public class Test01 {
+    public static void main(String[] args) {
+        int i = 12;
+        int j = trailingZeroes(i);
+        System.out.println(j);
+    }
+    public static int trailingZeroes(int n) {
+        int num = 1;
+        for (int i = 1; i <= n; i++) {
+            num *= i;
+        }
+        System.out.println(num);
+        String s = num + "";
+        int count = 0;
+        for (int length = s.length()-1; length > 1; length--) {
+            if(s.charAt(length) == '0'){
+                count++;
+            }
+        }
+        return count;
+    }
+}
