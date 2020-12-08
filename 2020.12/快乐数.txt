@@ -1,0 +1,30 @@
+package Demo11;
+
+/**
+ * Created with IntelliJ IDEA.
+ * Description:
+ * User:吴博
+ * Date:2020 12 08
+ * Time:23:07
+ */
+public class Test02 {
+    public static void main(String[] args) {
+        int i = 19;
+        boolean happy = isHappy(i);
+        System.out.println(happy);
+    }
+    public static boolean isHappy(int n) {
+        int count = 0;
+        int i = 1;
+        while (n != 0){
+            int num = num(n);
+            n = n/10;
+            i *= num;
+            count++;
+        }
+        return i == 1;
+    }
+    public static int num(int n ){
+        return n % 10;
+    }
+}
