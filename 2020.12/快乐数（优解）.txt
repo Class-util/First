@@ -1,0 +1,41 @@
+package Demo11;
+
+import java.util.ArrayList;
+import java.util.List;
+
+/**
+ * Created with IntelliJ IDEA.
+ * Description:
+ * User:吴博
+ * Date:2020 12 09
+ * Time:23:07
+ */
+public class Test02 {
+    public static void main(String[] args) {
+        int i = 19;
+        boolean happy = isHappy(i);
+        System.out.println(happy);
+    }
+    public static boolean isHappy(int n) {
+        List<Integer> list = new ArrayList<>();
+        list.add(n);
+        int count = n;
+        while (true){
+            int sum = fun(count);
+            count = sum;
+            if (list.contains(count))
+                break;
+            list.add(sum);
+        }
+        return count == 1;
+    }
+
+    public static int fun(int n){
+        int num = 0;
+        while (n != 0){
+            num += Math.pow(n % 10,2);
+            n /= 10;
+        }
+        return num;
+    }
+}
