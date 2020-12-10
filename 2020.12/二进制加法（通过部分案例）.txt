@@ -1,0 +1,35 @@
+package Demo11;
+
+/**
+ * Created with IntelliJ IDEA.
+ * Description:
+ * User:吴博
+ * Date:2020 12 10
+ * Time:17:56
+ */
+public class Test04 {
+    public static void main(String[] args) {
+        String s1 = "1010";
+        String s2 = "1011";
+        String s = addBinary(s1, s2);
+        System.out.println(s);
+    }
+    public static String addBinary(String a, String b) {
+        long m = toBinary(a);
+        long n = toBinary(b);
+        long num = m+n;
+        return Integer.toBinaryString(Math.toIntExact(num));
+    }
+    
+    public static long toBinary(String s){
+        long num = 0;
+        int i = 0;
+        for (int len = s.length()-1; len >= 0; len--) {
+            if(s.charAt(len) == '1'){
+                num += Math.pow(2,i);
+            }
+            i++;
+        }
+        return num;
+    }
+}
