@@ -1,0 +1,30 @@
+package Demo11;
+
+/**
+ * Created with IntelliJ IDEA.
+ * Description:
+ * User:吴博
+ * Date:2020 12 12
+ * Time:14:57
+ */
+public class Test06 {
+    public static void main(String[] args) {
+        int[] arr = {1,2,3,1};
+        int massage = massage(arr);
+        System.out.println(massage);
+    }
+    public static int massage(int[] nums) {
+        if(nums.length == 0)
+        return 0;
+        int ret = 0;
+        int num = nums[0];
+        for (int j : nums) {
+            int a = Math.max(ret, num);
+            int b = ret + j;
+
+            ret = a;
+            num = b;
+        }
+        return Math.max(ret,num);
+    }
+}
