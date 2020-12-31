@@ -1,0 +1,70 @@
+package Demo12;
+
+/**
+ * Created with IntelliJ IDEA.
+ * Description:
+ * User:吴博
+ * Date:2020 12 31
+ * Time:16:38
+ */
+class ListNode {
+    int val;
+    ListNode next;
+    ListNode() {}
+    ListNode(int val) { this.val = val; }
+    ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+}
+public class Test02 {
+    public static void main(String[] args) {
+        ListNode node = new ListNode(1);
+        ListNode node1 = new ListNode(2,node);
+        ListNode node2 = new ListNode(3,node1);
+        ListNode node3 = new ListNode(4,node2);
+        ListNode cur = removeNthFromEnd(node3, 0);
+        while (cur != null){
+            System.out.println(cur.val);
+            cur = cur.next;
+        }
+    }
+    public static ListNode removeNthFromEnd(ListNode head, int n) {
+        if(head.next == null){
+            return null;
+        }
+        int size = size(head);
+        int count = 0;
+        ListNode cur = head;
+
+        if(size == n){
+            head = head.next;
+            return head;
+        }
+        if(n == 0){
+            int sign = 0;
+            while (cur != null){
+                count++;
+                if(count == size-1){
+                    cur.next = null;
+                }
+                cur = cur.next;
+            }
+            return head;
+        }
+        while (cur != null){
+            count++;
+            if(count == size - n){
+                cur.next = cur.next.next;
+            }
+            cur = cur.next;
+        }
+        return head;
+    }
+
+    public static int size(ListNode head){
+        int count = 0;
+        while (head != null){
+            count++;
+            head = head.next;
+        }
+        return count;
+    }
+}
