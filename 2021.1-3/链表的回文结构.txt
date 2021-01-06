@@ -1,0 +1,42 @@
+import java.util.*;
+
+/*
+public class ListNode {
+    int val;
+    ListNode next = null;
+
+    ListNode(int val) {
+        this.val = val;
+    }
+}*/
+public class PalindromeList {
+    public boolean chkPalindrome(ListNode A) {
+        // write code here
+        ListNode B = reverseList(A);
+        
+        while(A != null){
+            if(A.val != B.val)
+                return false;
+            A = A.next;
+            B = B.next;
+        }
+        return true;
+    }
+    public static ListNode reverseList(ListNode head) {
+        ListNode prev = null;
+        ListNode newhead = null;
+        ListNode cur = head;
+        
+
+        while(cur != null){
+            ListNode curNext = cur.next;
+            if(curNext == null){
+                newhead = cur;
+            }
+            cur.next = prev;
+            prev = cur;
+            cur = curNext;
+        } 
+        return newhead;
+    }
+}
