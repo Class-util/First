@@ -1,0 +1,51 @@
+package Demo12;
+
+/**
+ * Created with IntelliJ IDEA.
+ * Description:
+ * User:吴博
+ * Date:2021 01 14
+ * Time:10:15
+ */
+public class Test08 {
+    public static void main(String[] args) {
+        int i = 5;
+        String str = countAndSay(i);
+        System.out.println(str);
+    }
+    public static String countAndSay(int n) {
+        if(n <= 0)
+            return "";
+        if (n == 1) {
+            return "1";
+        }
+        String[] str = new String[n + 1];
+        str[1] = "1";
+        str[2] = "11";
+        for (int i = 3; i <= n; i++) {
+            str[i] = describe(str[i - 1]);
+        }
+        return str[n];
+    }
+    public  static String describe(String pre) {
+        StringBuilder sb = new StringBuilder();
+        int len = pre.length();
+        int num = pre.charAt(0) - '0';
+        int count = 1;
+        for (int i = 1; i < len; i++) {
+            if(pre.charAt(i) == pre.charAt(i-1)){
+                count++;
+            }else {
+                sb.append(count);
+                sb.append(num);
+                num = pre.charAt(i) - '0';
+                count = 1;
+            }
+            if(i == len-1){
+                sb.append(count);
+                sb.append(num);
+            }
+        }
+        return sb.toString();
+    }
+}
