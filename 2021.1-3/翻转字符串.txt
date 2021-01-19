@@ -1,0 +1,32 @@
+import java.util.*;
+
+public class Main{
+    public static void main(String[] args){
+        Scanner sc = new Scanner(System.in);
+        int k = sc.nextInt();
+        String str = sc.next();
+        String s = reverseK(k,str);
+        System.out.println(s);
+    }
+    public static String reverseK(int k, String str){
+        if(str == null || k < 0 || k > str.length()){
+            return null;
+        }
+        str = Changs(str,0,k-1);
+        str = Changs(str,k,str.length() -1);
+        str = Changs(str,0,str.length() -1);
+        return str;
+    }
+    
+    public static String Changs(String str ,int left,int right){
+        char[] chars = str.toCharArray();
+        while(left <right){
+            char tmp = chars[left];
+            chars[left] = chars[right];
+            chars[right] = tmp;
+            left++;
+            right--;
+        }
+        return String.valueOf(chars);
+    }
+}
