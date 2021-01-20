@@ -1,0 +1,26 @@
+package Demo12;
+
+/**
+ * Created with IntelliJ IDEA.
+ * Description:
+ * User:吴博
+ * Date:2021 01 20
+ * Time:16:58
+ */
+public class Test11 {
+    public static void main(String[] args) {
+        String str = "Hello, my name is John";
+        int i = countSegments(str);
+        System.out.println(i);
+    }
+    public static int countSegments(String s) {
+        if(s == null || "".equals(s))
+            return 0;
+        String trim = s.trim();
+        if ("".equals(trim))
+            return 0;
+        // 正则表达式\\s+表示一个或多个空格
+        String[] split = trim.split("\\s+");
+        return split.length;
+    }
+}
