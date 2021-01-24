@@ -1,0 +1,24 @@
+class Solution {
+    public int evalRPN(String[] tokens) {
+         Stack<Integer> stack = new Stack<>();
+        for (String str : tokens) {
+            switch (str) {
+                case "+" -> {
+                    int num = stack.pop() + stack.pop();
+                    stack.push(num);
+                }
+                case "-" -> {
+                    int tmp = stack.pop();
+                    stack.push(stack.pop() - tmp);
+                }
+                case "*" -> stack.push(stack.pop() * stack.pop());
+                case "/" -> {
+                    int n = stack.pop();
+                    stack.push(stack.pop() / n);
+                }
+                default -> stack.push(Integer.parseInt(str));
+            }
+        }
+        return stack.pop();
+    }
+}
