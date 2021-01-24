@@ -1,0 +1,26 @@
+class Solution {
+    public boolean canThreePartsEqualSum(int[] arr) {
+        int count = 0;
+        for (int i : arr) {
+            count += i;
+        }
+        if(count % 3 != 0)
+            return false;
+        count = count / 3;
+        //用来计算部分和
+        int num = 0;
+        //计算有几部分
+        int flog = 0;
+        for (int i : arr) {
+            //一进来，就计算和
+            num += i;
+            //判断和是否为目标值
+            if(num == count){
+                flog++;
+                num = 0;
+            }
+        }
+        //System.out.println(flog);
+        return flog >= 3;
+    }
+}
