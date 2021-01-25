@@ -1,0 +1,85 @@
+class MyStack {
+
+    private Queue<Integer> eq1 = new LinkedList();
+    private Queue<Integer> eq2 = new LinkedList<>();
+
+    /** Initialize your data structure here. */
+    public MyStack() {
+
+    }
+    
+    /** Push element x onto stack. */
+    public void push(int x) {
+        if(!eq1.isEmpty()){
+            eq1.offer(x);
+        }else {
+            if(!eq2.isEmpty()){
+                eq2.offer(x);
+            }else{
+                eq1.offer(x);
+            }
+        }
+    }
+    
+    /** Removes the element on top of the stack and returns that element. */
+    public int pop() {
+        if(empty()){
+            return -1;
+        }
+        if(!eq1.isEmpty()){
+            int size = eq1.size();
+            while(size != 1){
+                eq2.offer(eq1.poll());
+                size--;
+            }
+            return eq1.poll();
+        }else {
+            int size = eq2.size();
+            while(size != 1){
+                eq1.offer(eq2.poll());
+                size--;
+            }
+            return eq2.poll();
+        }
+    }
+    
+    /** Get the top element. */
+    public int top() {
+        if(empty()){
+            return -1;
+        }
+        if(!eq1.isEmpty()){
+            int size = eq1.size();
+            int cur = -1;
+            while(size != 0){
+                cur = eq1.poll();
+                eq2.offer(cur);
+                size--;
+            }
+            return cur;
+        }else {
+            int size = eq2.size();
+            int cur = -1;
+            while(size != 0){
+                cur = eq2.poll();
+                eq1.offer(cur);
+                size--;
+            }
+            return cur;
+        }
+    }
+    
+    /** Returns whether the stack is empty. */
+    public boolean empty() {
+        return eq1.isEmpty() && eq2.isEmpty();
+    }
+}
+
+/**
+ * Your MyStack object will be instantiated and called as such:
+ * MyStack obj = new MyStack();
+ * obj.push(x);
+ * int param_2 = obj.pop();
+ * int param_3 = obj.top();
+ * boolean param_4 = obj.empty();
+ */
