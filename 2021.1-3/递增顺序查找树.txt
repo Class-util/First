@@ -1,0 +1,34 @@
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode() {}
+ *     TreeNode(int val) { this.val = val; }
+ *     TreeNode(int val, TreeNode left, TreeNode right) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
+ * }
+ */
+class Solution {
+       TreeNode ret;
+    public TreeNode increasingBST(TreeNode root) {
+        ret = new TreeNode(0);
+        TreeNode tree = ret;
+        func(root);
+        return tree.right;
+    }
+    public void func(TreeNode root){
+        if(root == null){
+            return ;
+        }
+        func(root.left);
+        TreeNode node = new TreeNode(root.val);
+        ret.right = node;
+        ret = node;
+        func(root.right);
+    }
+}
