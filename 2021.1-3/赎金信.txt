@@ -1,0 +1,21 @@
+class Solution {
+    public boolean canConstruct(String ransomNote, String magazine) {
+        char[] ch1 = ransomNote.toCharArray();
+        char[] ch2 = magazine.toCharArray();
+        if(ch2.length < ch1.length)
+            return false;
+        int[] ran = new int[26];
+        int[] mag = new int[26];
+        for (char c : ch1) {
+            ran[c - 'a']++;
+        }
+        for (char c : ch2) {
+            mag[c - 'a']++;
+        }
+        for (int i = 0; i < ran.length; i++) {
+            if(ran[i] > mag[i])
+                return false;
+        }
+        return true;
+    }
+}
