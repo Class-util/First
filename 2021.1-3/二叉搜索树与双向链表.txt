@@ -1,0 +1,40 @@
+/**
+public class TreeNode {
+    int val = 0;
+    TreeNode left = null;
+    TreeNode right = null;
+
+    public TreeNode(int val) {
+        this.val = val;
+
+    }
+
+}
+*/
+public class Solution {
+    
+    public TreeNode prev = null;
+    public void inOrderTraversal(TreeNode pCur) {
+        if(pCur == null){
+            return ;
+        }
+        inOrderTraversal(pCur.left);
+        pCur.left = prev;
+        if(prev != null){
+            prev.right = pCur;
+        }
+        prev = pCur;
+        inOrderTraversal(pCur.right);
+    }
+    
+    public TreeNode Convert(TreeNode pRootOfTree) {
+        if(pRootOfTree == null)
+            return null;
+        inOrderTraversal(pRootOfTree);
+        TreeNode head = pRootOfTree;
+        while(head.left != null){
+            head = head.left;
+        }
+        return head;
+    }
+}

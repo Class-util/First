@@ -1,0 +1,48 @@
+import java.util.*;
+
+class BTNode {
+    public char val;
+    public BTNode left;//左子树的引用
+    public BTNode right;//右子树的引用
+
+    public BTNode(char val) {
+        this.val = val;
+    }
+}
+
+public class Main {
+    
+    public static int i = 0;
+    
+    public static void main(String[] args){
+        Scanner sc = new Scanner(System.in);
+        String str = sc.nextLine();
+        BTNode tree = createBT(str);
+        inOrderTraversal(tree);
+    }
+    
+    // 中序遍历
+    public static void inOrderTraversal(BTNode root) {
+        if(root == null) return;
+        inOrderTraversal(root.left);
+        System.out.print(root.val + " ");
+        inOrderTraversal(root.right);
+    }
+    
+    public static BTNode createBT(String str){
+        if(str == null || str.length() <= 0 ){
+            return null;
+        }
+        
+        BTNode root = null;
+        if(str.charAt(i) != '#'){
+            root = new BTNode(str.charAt(i));
+            i++;
+            root.left = createBT(str);
+            root.right = createBT(str);
+        }else {
+            i++;
+        }
+        return root;
+    }
+}
