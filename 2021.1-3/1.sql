@@ -30,3 +30,21 @@ INSERT INTO exam_result (id,name, chinese, math, english) VALUES
  select * from exam_result where chinese between 80 and 90;
  select * from exam_result where math in (58,59,98,99);
  select name from exam_result where qq_mail is NOT NULL;
+ 
+ 
+ 
+ update book set price = 61 where name = 'java核心技术'; 
+ insert into book values ('java核心技术','Cay S.Horstman',56.43,'计算机技术')
+ delete from product where price > 60 or  storage < 200;
+ update product set price = price + 50 where storage > 30;
+ insert into product (name,price,storage,'desc') values ('学生书包',18.91,101,null)
+ select * from user where (id between 1 and 200 or id between 300 and 500) and accout is not null or amount > 1000;
+ select * from book where author is not null or (price > 50 and publish_data > 2019);
+ select * from article where title is null or create_data > '2019.1.1';
+ select * from article where create_data between '2019-01-01 10:30:00' and '2019-00-10 04:02:00';
+ select name,age from student where name like '张%' and age between 18 and 25; 
+ 
+ 
+ 
+ 
+ 
