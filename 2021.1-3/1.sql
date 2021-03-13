@@ -45,6 +45,63 @@ INSERT INTO exam_result (id,name, chinese, math, english) VALUES
  select name,age from student where name like 'ÕÅ%' and age between 18 and 25; 
  
  
+ select sex,avg(salary) from emp group by sex;
+ select depart,sum(salary) from emp group by depart;
+ select depart,sum(salary) from emp group by sum(salary) desc limit 1,1;
+ select name from emp group by having count(name) > 1;
+ select depart,avg(salary) from emp where salary > 1000 and sex = 'ÄÐ' group by depart;
+ 
+ 
+ select depart.name,sum(salary.salary) from depart,staff,salary where salary.staff_id = staff.staff_id and staff.depart_id = depart.depart_id and salary.monyh = 2016-09 group by depart.depart_id;
+ 
+ select depart.name,sum(salary.salary) 
+ from salary 
+ join staff on salary.staff_id = staff.staff_id 
+ join depart on staff.depart_id = depart.depart_id 
+ where salary.month = 2016-09
+ group by depart.depart_id;
+ 
+ select depart.name,count(staff.staff_id)
+ from staff
+ join depart on depart.depart_id = staff.depart_id
+ group by staff.depart_id;
+ 
+ select depart.name,salary.month,sum(salary.salary)
+ from depart
+ join staff on depart.depart_id = staff.depart_id;
+ join salary on staff.staff_id = salary.staff_id;
+ group by depart.depart_id,salary.month;
+ 
+ select A.name,A.grade,B.age 
+ from B
+ left join A on A.name = B.name
+ 
+SELECT
+max( Salary ) AS SecondHighestSalary 
+FROM
+Employee 
+desc limit 1,1;
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
  
  
  
