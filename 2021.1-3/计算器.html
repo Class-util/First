@@ -23,12 +23,35 @@
                 var sum = parseInt(number1.value) + parseInt(number2.value);
                 document.getElementById("result").innerHTML = "<h1>计算结果为" + sum + "</h1>";
             } else if (type == 2) {
-                if (confirm("是否清空?")) {
+                if (number1.value == "") {
+                    alert("请输入第一个数字");
+                    return false;
+                }
+                if (number2.value == "") {
+                    alert("请输入第二个数字");
+                    p
+                    return false;
+                }
+                var sum = parseInt(number1.value) - parseInt(number2.value);
+                document.getElementById("result").innerHTML = "<h1>计算结果为" + sum + "</h1>";
+            } else if (type == 3) {
+                if (number1.value == "") {
+                    alert("请输入第一个数字");
+                    return false;
+                }
+                if (number2.value == "") {
+                    alert("请输入第二个数字");
+                    p
+                    return false;
+                }
+                var sum = parseInt(number1.value) * parseInt(number2.value);
+                document.getElementById("result").innerHTML = "<h1>计算结果为" + sum + "</h1>";
+            } else if (type == 4) {
+                if (confirm("是否清空？")) {
                     number1.value = NaN;
-                    number2.value = "";
+                    number2.value = NaN;
                     document.getElementById("result").innerHTML = "";
                 }
-
             }
         }
     </script>
@@ -42,9 +65,11 @@
         数字2：<input type="number" id="number_b">
         <p></p>
 
-        <div>
-            <input type="button" value="计算" onclick="hyck(1)">
-            <input type="button" value="清空" onclick="hyck(2)">
+        <div style="margin-left: 50px;">
+            <input type="button" value="相加" onclick="hyck(1)">
+            <input type="button" value="相减" onclick="hyck(2)">
+            <input type="button" value="相乘" onclick="hyck(3)">
+            <input type="button" value="清空" onclick="hyck(4)">
         </div>
 
         <div id="result" style="margin-top: 100px; color: blueviolet;">
