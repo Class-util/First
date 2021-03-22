@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>注册</title>
+    <Script>
+        function myck(type) {
+            var in_name = document.getElementById("name_a");
+            var in_password = document.getElementById("password_a");
+            var in_repass = document.getElementById("repass");
+            if (type == 1) {
+                if (in_name.value == "") {
+                    alert("请输入用户名");
+                    return false;
+                }
+                if (in_password.value == "") {
+                    alert("请输入密码");
+                    return false;
+                }
+                if (in_repass.value == "") {
+                    alert("请再次确认密码");
+                    return false;
+                }
+                if (in_repass.value != in_password.value) {
+                    alert("两次密码不相同");
+                    return false;
+                }
+                alert("恭喜：操作成功");
+            } else if (type == 2) {
+                if (confirm("是否确认清空")) {
+                    // 清空数据
+                    in_name.value = "";
+                    in_password.value = "";
+                    in_repass.value = "";
+                }
+            }
+        }
+    </Script>
+</head>
+
+<body>
+    <div style="text-align: center;margin-top: 100px;">
+        <h1>注册</h1>
+        <div style="margin-left: -20px;">
+            &nbsp;&nbsp;用户名：<input type="text" id="name_a" name="username">
+            <p></p>
+            &nbsp;&nbsp;密&nbsp;&nbsp;&nbsp;&nbsp;码：
+            <input type="password" id="password_a" name="password">
+            <p></p>
+            确认密码：<input type="password" id="repass">
+            <p></p>
+            <div>
+                <input id="input_sub" name="input_sub" type="button" value=" 提 交 " onclick="myck(1)">
+                <input type="button" value=" 清 空 " onclick="myck(2)">
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
