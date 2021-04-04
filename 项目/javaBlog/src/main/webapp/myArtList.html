@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>文章列表</title>
+    <script src="jquery-1.9.1.min.js"></script>
+    <script>
+        //页面加载完成后，在执行此方法
+        jQuery(function (){
+            //后端查询文章列表
+            jQuery.getJSON(
+                "myArtList",
+                {},
+                function (data){
+                    //将table信息进行替换为后端数据
+                    if(data != null && data.succ == 1){
+                        var html = "";
+                        for (var i = 0; i < data.list.length; i++) {
+                            var article = data.list[i];
+                            html += " <tr>\n" +
+                                "            <td>\n" +
+                                article.id + "                \n" +
+                                "            </td>\n" +
+                                "            <td>\n" +
+                                article.title + "                \n" +
+                                "            </td>\n" +
+                                "            <td>\n" +
+                                article.createtime + "                \n" +
+                                "            </td>\n" +
+                                "            <td>\n" +
+                                article.rcount + "                \n" +
+                                "            </td>\n" +
+                                "            <td>\n" +
+                                "                修改 删除\n" +
+                                "            </td>\n" +
+                                "        </tr>";
+                        }
+                        jQuery("#tab1").append(html);
+                    }else {
+                        alert("操作失败" + data.msg);
+                    }
+                }
+            );
+        })
+    </script>
+</head>
+<body style="margin-top: 50px">
+        <table id="tab1" style="width: 80%;margin-left: 50px" border="1" >
+            <tr>
+                <td>编号</td>
+                <td>标题</td>
+                <td>发布时间</td>
+                <td>阅读数</td>
+                <td>操作</td>
+            </tr>
+        </table>
+</body>
+</html>

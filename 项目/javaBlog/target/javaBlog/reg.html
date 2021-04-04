@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>注册</title>
+</head>
+<script src="jquery-1.9.1.min.js"></script>
+<script>
+    function mysub(type) {
+        //拿到用户信息
+        var username = jQuery("#username");
+        var password = jQuery("#password");
+        var password2 = jQuery("#password2");
+        if(type == 2){
+            //清空操作
+            if(confirm("是否清空？")){
+                username.val("");
+                password.val("");
+                password2.val("");
+            }
+            return false;
+        }
+        //提交操作，先进行非空效验
+        if(username.val().trim() == ""){
+            alert("请输入用户名!");
+            username.focus();
+            return false;
+        }
+        if(password.val().trim() == ""){
+            alert("请输入密码!");
+            password.focus();
+            return false;
+        }
+        if(password2.val().trim() == ""){
+            alert("请再次输入密码!");
+            password2.focus();
+            return false;
+        }
+        if(password.val() != password2.val()){
+            alert("两次输入的密码不一致");
+            password.focus();
+            return false;
+        }
+
+        //使用ajax进行操作
+        jQuery.getJSON(
+            "reg",
+            {
+                "username": username.val(),
+                "password": password.val()
+            },
+            //回调函数
+            function (data) {
+                if(data != null && data.succ != null && data.succ == 1){
+                    alert("恭喜注册成功!");
+                }else {
+                    alert("注册失败" + data.msg);
+                }
+            });
+    }
+</script>
+<body>
+<div style="text-align: center;margin-top: 70px;">
+    <h1>注册功能</h1>
+    &nbsp;&nbsp;用户名：<input id="username" name="username" type="text"><p></p>
+    &nbsp;&nbsp;&nbsp;&nbsp;密&nbsp;&nbsp;码：<input id="password" name="password" type="password"><p></p>
+    确认密码：<input id="password2" name="password2" type="password"><p></p>
+    <input onclick="mysub(1)" type="button" value=" 提 交 ">
+    <input onclick="mysub(2)" type="button" value=" 清 空 ">
+</div>
+</body>
+</html>
