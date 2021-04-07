@@ -18,6 +18,8 @@ import java.util.List;
  * Time:17:09
  */
 public class ArtInfoDao {
+
+    //读取文章信息
     public List<ArtInfo> getAtrListByUID(int uid) throws SQLException {
         List<ArtInfo> list = new ArrayList<>();
         Connection connection = DBUtils.getConnection();
@@ -34,6 +36,72 @@ public class ArtInfoDao {
             articleInfo.setCreatetime(resultSet.getDate("createtime"));
             list.add(articleInfo);
         }
+        DBUtils.close(connection,preparedStatement,resultSet);
         return list;
+    }
+
+    //进行删除操作
+    public int del(int id) throws SQLException {
+        int ret= 0;
+        if(id > 0){
+            Connection connection = DBUtils.getConnection();
+            String sql = "delete from articleinfo where id = ?";
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setInt(1,id);
+            ret = preparedStatement.executeUpdate();
+            DBUtils.close(connection,preparedStatement,null);
+        }
+        return ret;
+    }
+//根据id查询文章详情
+    public ArtInfo getArtById(int id) throws SQLException {
+        ArtInfo artInfo = new ArtInfo();
+        if(id > 0){
+            Connection connection = DBUtils.getConnection();
+            String sql = "select * from articleinfo where id = ?";
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setInt(1,id);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            if(resultSet.next()){
+                artInfo.setId(resultSet.getInt("id"));
+                artInfo.setTitle(resultSet.getString("title"));
+                artInfo.setContent(resultSet.getString("content"));
+            }
+            DBUtils.close(connection,preparedStatement,resultSet);
+        }
+        return artInfo;
+    }
+
+    //文章修改
+    public int uoArt(int id, String title, String content) throws SQLException {
+        int ret = 0;
+        if(id > 0 && title!= null && content != null && !title.equals("") && !content.equals("")){
+            Connection connection = DBUtils.getConnection();
+            String sql = "update articleinfo set title = ?,content = ? where id = ?";
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setString(1,title);
+            preparedStatement.setString(2,content);
+            preparedStatement.setInt(3,id);
+            ret = preparedStatement.executeUpdate();
+            DBUtils.close(connection,preparedStatement,null);
+        }
+        return ret;
+    }
+
+    //文章添加
+    public int add(String title, String content, int uid) throws SQLException {
+        int ret = 0;
+        if(title!= null && content != null && !title.equals("") && !content.equals("")){
+            Connection connection = DBUtils.getConnection();
+            String sql = "insert into articleinfo(title,content,uid) values (?,?,?)";
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setString(1,title);
+            preparedStatement.setString(2,content);
+            preparedStatement.setInt(3,uid);
+
+            ret = preparedStatement.executeUpdate();
+            DBUtils.close(connection,preparedStatement,null);
+        }
+        return ret;
     }
 }

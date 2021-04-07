@@ -5,6 +5,25 @@
     <title>文章列表</title>
     <script src="jquery-1.9.1.min.js"></script>
     <script>
+        //定义删除的方法
+        function mydel(id){
+            if(confirm("是否删除？")){
+                //调用后端删除方法
+                jQuery.getJSON(
+                    "mydel",
+                    {"id":id},
+                    function (data) {
+                        if(data != null && data.succ == 1){
+                            alert("恭喜操作成功");
+                            //页面刷新
+                            location.href = location.href;
+                        }else {
+                            alert("抱歉操作失败" + data.msg);
+                        }
+                    });
+            }
+        }
+
         //页面加载完成后，在执行此方法
         jQuery(function (){
             //后端查询文章列表
@@ -31,7 +50,8 @@
                                 article.rcount + "                \n" +
                                 "            </td>\n" +
                                 "            <td>\n" +
-                                "                修改 删除\n" +
+                                "                <a href='upart.html?id="+ article.id +"'>修改</a> " +
+                                "                <a href='javascript:mydel("+ article.id +");'>删除</a> \n" +
                                 "            </td>\n" +
                                 "        </tr>";
                         }
@@ -44,8 +64,11 @@
         })
     </script>
 </head>
-<body style="margin-top: 50px">
+<body style="text-align: center; margin-top: 50px">
+<h1>我的文章列表</h1>
+<a href="addart.html">添加文章</a>
         <table id="tab1" style="width: 80%;margin-left: 50px" border="1" >
+            <hr>
             <tr>
                 <td>编号</td>
                 <td>标题</td>

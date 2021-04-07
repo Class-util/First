@@ -28,3 +28,10 @@ create table articleinfo(
     state int default 1,
     uid int not null
 );
+
+-- 插入测试数据
+insert into userinfo(id,username,password) values(1,'admin','123');
+
+insert into articleinfo(title,content,uid)
+values('喜迎西安十四运1','内容：喜迎西安十四运1',1),
+      ('喜迎西安十四运2','内容：喜迎西安十四运2',1);

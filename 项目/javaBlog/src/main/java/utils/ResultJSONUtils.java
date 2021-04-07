@@ -1,5 +1,6 @@
 package utils;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.json.JsonMapper;
 
 import javax.servlet.http.HttpServletResponse;
@@ -19,6 +20,7 @@ public class ResultJSONUtils {
         response.setCharacterEncoding("utf-8");
         response.setContentType("application/json");
         PrintWriter writer = response.getWriter();
+        //ObjectMapper mapper1 = new ObjectMapper();
         JsonMapper mapper = new JsonMapper();
         writer.println(mapper.writeValueAsString(map));
     }
