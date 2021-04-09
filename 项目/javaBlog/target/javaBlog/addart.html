@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>添加文章</title>
+</head>
+<script src="jquery-1.9.1.min.js"></script>
+<script>
+    function mysub(type){
+        var title = jQuery("#title");
+        var content = jQuery("#content");
+
+        if(type == 2){
+            if(confirm("是否确认清空？")){
+                title.val("");
+                content.val("");
+            }
+            return false;
+        }
+        if(title.val().trim() == ""){
+            alert("标题不能为空！");
+            title.focus();
+            return false;
+        }
+        if(content.val().trim() == ""){
+            alert("正文不能为空！");
+            content.focus();
+            return false;
+        }
+        jQuery.getJSON(
+            "addart",
+            {
+                "title":title.val(),
+                "content":content.val()
+            },
+            function (data) {
+                if(data != null && data.succ == 1){
+                    alert("添加成功！");
+                    if(confirm("是否继续添加？")){
+                        location.href = location.href;
+                    }else {
+                        location.href = "myArtList.html";
+                    }
+                }else {
+                    alert("添加失败！" + data.msg);
+                }
+            }
+        );
+    }
+</script>
+<body>
+<div style="margin-left: 50px; margin-top: 30px;">
+    <h1>文章添加</h1>
+    标题：<input id = "title" name="title" type="text"><p></p>
+    正文：<textarea id="content" name="content" style="width: 60%;height: 300px">
+             </textarea><p></p>
+    <input value="提 交" type="button" onclick="mysub(1)"></input>
+    <input value="清 空" type="button" onclick="mysub(2)"></input>
+</div>
+</body>
+</html>

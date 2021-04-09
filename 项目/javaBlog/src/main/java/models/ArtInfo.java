@@ -15,15 +15,15 @@ public class ArtInfo {
     private Date updatatime;
     private String title;
     private String content;
-    private String rcount;
+    private int rcount;
     private int state;
     private int uid;
 
-    public String getRcount() {
+    public int getRcount() {
         return rcount;
     }
 
-    public void setRcount(String rcount) {
+    public void setRcount(int rcount) {
         this.rcount = rcount;
     }
 

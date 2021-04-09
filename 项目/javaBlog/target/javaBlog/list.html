@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>文章列表</title>
+    <script src="jquery-1.9.1.min.js"></script>
+    <script>
+        var page = 1;
+
+        function datafm(timespan) {
+            var date = new Date(timespan);
+            var y = date.getFullYear();
+            var m = date.getMonth() + 1;
+            var d = date.getDate();
+            return y + "-" + m + "-" + d;
+        }
+
+        function mypage(type){
+            if(type == 1){
+                if(page > 1){
+                    location.href = "list.html?p=" + (page - 1);
+                }else {
+                    alert("没有上一页");
+                }
+
+            }else {
+                location.href = "list.html?p=" + (page + 1);
+            }
+        }
+
+        jQuery(function () {
+
+            var params = location.search;
+            if(params != ""){
+                page = parseInt( params.split("=")[1]);
+            }
+            //访问分页接口，去查询数据
+
+            jQuery.getJSON(
+                "list",
+                {
+                    "page":page,
+                    "psize":2
+                },
+                function (data) {
+                    if(data != null && data.succ == 1){
+                        var html = "";
+                        for (var i = 0; i < data.list.length; i++) {
+                            // 文章对象的数据
+                            var art = data.list[i];
+                            html += "<tr>\n" +
+                                "    <td>\n" +
+                                art.id + "        \n" +
+                                "    </td>\n" +
+                                "    <td>\n<a href='detail.html?id=" +
+                                art.id + "'>" +
+                                art.title + "</a>        \n" +
+                                "    </td>\n" +
+                                "    <td>\n" +
+                                art.username + "        \n" +
+                                "    </td>\n" +
+                                "    <td>\n" +
+                                datafm(art.createtime) + "        \n" +
+                                "    </td>\n" +
+                                "    <td>\n" +
+                                art.rcount + "        \n" +
+                                "    </td>\n" +
+                                "</tr>";
+                        }
+                        jQuery("#table").append(html);
+                    }else {
+                        alert("查询失败" + data.msg);
+                    }
+                }
+            );
+        });
+    </script>
+</head>
+<body>
+    <div style="margin-left: 100px;margin-top: 30px">
+        <h1>文章列表</h1>
+        <a href="myArtList.html">我的文章列表</a>
+        <hr>
+        <table id = "table" style="width: 80%" border="1">
+            <tr>
+                <td>编号</td>
+                <td>标题</td>
+                <td>作者</td>
+                <td>发布时间</td>
+                <td>阅读量</td>
+            </tr>
+        </table>
+        <a href="javascript:mypage(1)">上一页</a>
+        <a href="javascript:mypage(2)">下一页</a>
+    </div>
+</body>
+</html>

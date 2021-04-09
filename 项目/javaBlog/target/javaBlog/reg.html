@@ -53,6 +53,7 @@
             function (data) {
                 if(data != null && data.succ != null && data.succ == 1){
                     alert("恭喜注册成功!");
+                    location.href = "login.html";
                 }else {
                     alert("注册失败" + data.msg);
                 }
@@ -67,6 +68,8 @@
     确认密码：<input id="password2" name="password2" type="password"><p></p>
     <input onclick="mysub(1)" type="button" value=" 提 交 ">
     <input onclick="mysub(2)" type="button" value=" 清 空 ">
+    <p></p>
+    <a href="login.html">已有账户？直接登录</a>
 </div>
 </body>
 </html>
