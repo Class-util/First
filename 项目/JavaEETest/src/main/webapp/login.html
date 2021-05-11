@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>登录页面</title>
+</head>
+
+<script src="jquery-1.9.1.min.js"></script>
+<script>
+  function mysub(flog){
+    var user = jQuery("#username");
+    var pwd = jQuery("#password");
+    //清空操作
+    if(flog == 0){
+      if(confirm("是否清空？")){
+        user.val("");
+        pwd.val("");
+      }
+      return false;
+    }
+    //非空效验
+    if(user.val().trim() == ""){
+      alert("请输入用户名!");
+      user.focus();
+      return false;
+    }
+    if(pwd.val().trim() == ""){
+      alert("请输入密码!");
+      pwd.focus();
+      return false;
+    }
+    //使用json与后端进行交互
+    jQuery.getJSON(
+            "login",
+            {
+              "username":user.val(),
+              "password":pwd.val()
+            },
+            function (data) {
+              if(data != null && data.stats != null && data.stats == 1){
+                alert("登录成功");
+                //location.href = "";
+              }else {
+                alert("登录失败!"+data.msg);
+              }
+            });
+  }
+</script>
+<body style="margin-top: 100px;text-align: center">
+    <h1>登录页面</h1>
+  用户名&nbsp;:&nbsp;<input type="text" name="username" id="username">
+<p></p>
+    密&nbsp;&nbsp;码&nbsp;:&nbsp;<input type="password" name="password" id="password">
+<p></p>
+    <input type="submit" value="登录" onclick="mysub(1)">
+    <input type="submit" value="清空" onclick="mysub(0)">
+<p></p>
+    <a href="reg.html">没有账号？点击注册</a>
+</body>
+</html>
