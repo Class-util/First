@@ -20,5 +20,7 @@ public class Response {
     private boolean ok;
     //操作失败时的失败原因
     private String reason;
+    //保存业务数据
+    private Object data;
 
 }

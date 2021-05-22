@@ -3,7 +3,10 @@ package org.example.util;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mysql.jdbc.jdbc2.optional.MysqlDataSource;
+import org.example.exception.AppException;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -48,7 +51,7 @@ public class Util {
         try {
             return M.writeValueAsString(o);
         } catch (JsonProcessingException e) {
-            throw new RuntimeException("JSON序列化失败：" + o , e);
+            throw new AppException("JSON序列化失败：" + o , e);
         }
     }
 
@@ -61,7 +64,19 @@ public class Util {
             return M.readValue(s,c);
         } catch (JsonProcessingException e) {
             //如果出现异常，一般都是json字符串中的键，在class中没有找到对应的属性
-            throw new RuntimeException("JSON反序列化失败：" , e);
+            throw new AppException("JSON反序列化失败：" , e);
+        }
+    }
+
+    /**
+     * 方法重载，通过输入流传值
+     * */
+    public static <T> T deserialize(InputStream is, Class<T> c){
+        try {
+            return M.readValue(is,c);
+        } catch (IOException e) {
+            //如果出现异常，一般都是json字符串中的键，在class中没有找到对应的属性
+            throw new AppException("JSON反序列化失败：" , e);
         }
     }
 
@@ -73,7 +88,7 @@ public class Util {
         try {
             return DATA_SOURCE.getConnection();
         } catch (SQLException e) {
-            throw new RuntimeException("获取数据库连接失败" + e);
+            throw new AppException("获取数据库连接失败" + e);
         }
     }
 
@@ -87,7 +102,7 @@ public class Util {
             if(preparedStatement != null) preparedStatement.close();
             if(connection != null) connection.close();
         } catch (SQLException e) {
-            throw new RuntimeException("释放数据库资源出错" + e);
+            throw new AppException("释放数据库资源出错" + e);
         }
     }
 

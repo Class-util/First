@@ -2,7 +2,7 @@ package org.example.exception;
 
 /**
  * Created with IntelliJ IDEA.
- * Description:
+ * Description:将报错信息输送给前端
  * User:吴博
  * Date:2021 05 20
  * Time:21:16
