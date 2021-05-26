@@ -262,8 +262,11 @@
           $.ajax({
             url: 'logout',
             type: 'get',
-            success: function(data, status) {
+            success: function(body, status) {
+              if(body.ok)
               window.location.reload();
+              else
+                alert(body.reason);
             }
           });
         },

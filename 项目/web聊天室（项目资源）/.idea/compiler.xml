@@ -7,11 +7,11 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="java_image_server" />
+        <module name="java_chatroom" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel target="8">
-      <module name="java_image_server" target="1.8" />
+      <module name="java_chatroom" target="1.8" />
     </bytecodeTargetLevel>
   </component>
 </project>
