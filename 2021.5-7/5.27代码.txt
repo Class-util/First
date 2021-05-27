@@ -1,0 +1,85 @@
+package Demo14;
+
+/**
+ * Created with IntelliJ IDEA.
+ * Description:
+ * User:吴博
+ * Date:2021 05 27
+ * Time:17:21
+ */
+public class Test01 {
+
+    public static void main(String[] args) {
+        String interpret = interpret("(al)G(al)()()G");
+        System.out.println(interpret);
+    }
+
+    //设计 Goal 解析器
+    public static  String interpret(String command) {
+        //定义指针
+        int flog1 = 0;
+        //定义返回值
+        StringBuilder ret = new StringBuilder();
+        while(flog1 < command.length()){
+            //如果该位置字符为G
+            if("G".equals(command.charAt(flog1) + "")){
+                ret.append("G");
+                if(flog1 + 1 == command.length() - 1){
+                    ret.append("G");
+                    break;
+                }else{
+                    if(flog1 == command.length() - 1){
+                        break;
+                    }else {
+                        flog1++;
+                    }
+                }
+            }
+            //如果遇到括号
+            if("(".equals(command.charAt(flog1) + "")){
+                if(")".equals(command.charAt(flog1 + 1) + "")){
+                    if(flog1 + 1 == command.length() - 1){
+                        ret.append("o");
+                        break;
+                    }else{
+                        flog1 = flog1 + 2;
+                    }
+                    ret.append("o");
+                }else{
+                    while(!")".equals(command.charAt(flog1) + "")){
+                        flog1++;
+                    }
+                    ret.append("al");
+                    if(flog1 + 1 == command.length() - 1){
+                        ret.append("G");
+                        break;
+                    }else{
+                        flog1++;
+                    }
+                }
+            }
+        }
+        return ret.toString();
+    }
+
+    public static void main1(String[] args) {
+        for (int i = 65; i <= 90; i++) {
+            System.out.println(i%26);
+        }
+        boolean leetcode = checkIfPangram("leetcode");
+        System.out.println(leetcode);
+    }
+    //判断句子是否全为子母句
+    public static boolean checkIfPangram(String sentence) {
+        int[] arr = new int[26];
+        for(int i = 0; i < sentence.length(); i++){
+            arr[sentence.charAt(i) % 26] = 1;
+        }
+        for (int j : arr) {
+            if (j == 0) {
+                return false;
+            }
+        }
+        return true;
+    }
+}
