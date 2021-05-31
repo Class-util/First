@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>用户信息查询</title>
+</head>
+<script src="jquery-1.9.1.min.js"></script>
+<script>
+  function mysub(){
+    var username = jQuery("#username");
+    //执行查询操作
+      //非空效验
+      if(username.val().trim() == ""){
+        alert("请输入要查询的用户名!");
+        username.focus();
+        return false;
+      }
+      //json
+      jQuery.getJSON(
+              "search",
+              {
+                "username":username.val(),
+                    "flog":1
+              },
+              function (data) {
+                if(data != null && data.stats!= null && data.stats == 1){
+                  alert(data.username + ":" + data.password);
+                  jQuery("#username1").val(data.username);
+                  jQuery("#password").val(data.password);
+                }
+              });
+  }
+  function mysub1(){
+        var username = jQuery("#username");
+        var username1 = jQuery("#username1");
+        var password = jQuery("#password");
+        /*if(username1.val().trim() == ""){
+              alert("请输入用户名!");
+              username1.focus();
+              return false;
+        }
+        if(password.val().trim() == ""){
+              alert("请输入密码!");
+              password.focus();
+              return false;
+        }*/
+        //json
+        jQuery.getJSON(
+                "search",
+                {
+                      "username":username.val(),
+                      "username1": username1.val(),
+                      "password": password.val(),
+                      "flog":2
+                },
+                //回调函数
+                function (data) {
+                      if(data != null && data.stats != null && data.stats == 1){
+                            alert("恭喜修改成功!");
+                            //location.href = "login.html";
+                      }else {
+                            alert("修改失败:" + data.msg);
+                      }
+                });
+  }
+</script>
+
+<body style="text-align: center;margin-top: 70px">
+      <h1>查询和修改用户</h1>
+      输入查询的用户名：<input type="text" name="username" id="username">&nbsp;&nbsp;<input type="button" value="查询用户"
+                                                                               onclick="mysub()">
+      <p></p>
+      用户名：<input type="text" name="username1" id="username1">
+      <p></p>
+      密&nbsp;&nbsp;码：<input type="text" name="password" id="password">
+      <p></p>
+      <input type="button" value="修改用户" onclick="mysub1()">
+      <p></p>
+      <a href="reg.html">注册用户</a>
+      <p></p>
+      <a href="login.html">登录</a>
+      <p></p>
+      <a href="remove.html">删除</a>
+</body>
+</html>

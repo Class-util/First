@@ -39,7 +39,7 @@
             function (data) {
               if(data != null && data.stats != null && data.stats == 1){
                 alert("登录成功");
-                //location.href = "";
+                location.href = "index.jsp";
               }else {
                 alert("登录失败!"+data.msg);
               }
@@ -56,5 +56,9 @@
     <input type="submit" value="清空" onclick="mysub(0)">
 <p></p>
     <a href="reg.html">没有账号？点击注册</a>
+    <p></p>
+    <a href="remove.html">删除用户</a>
+    <p></p>
+    <a href="search.html">查询用户</a>
 </body>
 </html>

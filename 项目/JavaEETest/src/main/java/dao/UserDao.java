@@ -16,6 +16,7 @@ import java.sql.SQLException;
  * Time:15:16
  */
 public class UserDao {
+
     //查询用户
     public User getUser(String username, String password) throws SQLException {
         Connection connection = DButils.getConnection();
@@ -23,6 +24,21 @@ public class UserDao {
         PreparedStatement preparedStatement = connection.prepareStatement(sql);
         preparedStatement.setString(1,username);
         preparedStatement.setString(2,password);
+        User user = new User();
+        ResultSet resultSet = preparedStatement.executeQuery();
+        if(resultSet.next()){
+            user.setName(resultSet.getString("username"));
+            user.setPassword(resultSet.getString("password"));
+        }
+        DButils.close(connection,preparedStatement,resultSet);
+        return user;
+    }
+    //通过用户名查询用户信息
+    public User getUser(String username) throws SQLException {
+        Connection connection = DButils.getConnection();
+        String sql = "select * from userMsg where username = ?";
+        PreparedStatement preparedStatement = connection.prepareStatement(sql);
+        preparedStatement.setString(1,username);
         User user = new User();
         ResultSet resultSet = preparedStatement.executeQuery();
         if(resultSet.next()){
@@ -43,6 +59,29 @@ public class UserDao {
         preparedStatement.setString(2,password);
         ret = preparedStatement.executeUpdate();
         DButils.close(connection,preparedStatement,null);
+        return ret;
+    }
+
+    //用户数据删除操作
+    public int removeUser(String username) throws SQLException {
+        int ret = 0;
+        Connection connection = DButils.getConnection();
+        String sql = " delete from usermsg where username = ?;";
+        PreparedStatement preparedStatement = connection.prepareStatement(sql);
+        preparedStatement.setString(1,username);
+        ret = preparedStatement.executeUpdate();
+        return ret;
+    }
+    //修改用户信息
+    public int updateUser(String username, String username1, String password) throws SQLException {
+        int ret = 0;
+        Connection connection = DButils.getConnection();
+        String sql = "update usermsg set username = ?,password = ? where username = ?";
+        PreparedStatement preparedStatement = connection.prepareStatement(sql);
+        preparedStatement.setString(1,username1);
+        preparedStatement.setString(2,password);
+        preparedStatement.setString(3,username);
+        ret = preparedStatement.executeUpdate();
         return ret;
     }
 }

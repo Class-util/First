@@ -13,4 +13,4 @@ create table userMsg
     password varchar(32) not null
 );
 -- 插入测试数据
-insert into userMsg(username,password) values('admin','123');
+insert into userMsg(username,password) values('ad','123');

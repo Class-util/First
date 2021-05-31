@@ -16,7 +16,7 @@
 
     <v-navigation-drawer v-model="drawer" app>
       <v-list dense v-show="!login.isLogin">
-        <v-list-item link>
+        <v-list-item link v-on:click="registerForm.showDialog=true">
           <v-list-item-action>
             <v-icon>mdi-account-plus</v-icon>
           </v-list-item-action>
@@ -155,6 +155,48 @@
             </v-card>
           </v-dialog>
         </v-row>
+
+        <v-row justify="center">
+          <v-dialog v-model="registerForm.showDialog" persistent max-width="400px">
+            <v-card>
+              <v-card-title>
+                <span class="headline">注册</span>
+              </v-card-title>
+              <v-card-text>
+                <v-container>
+                  <v-row>
+                    <v-col cols="12" sm="12">
+                      <v-text-field label="用户名*" v-model="registerForm.inputUsername" required></v-text-field>
+                    </v-col>
+                  </v-row>
+                  <v-row>
+                    <v-col cols="12" sm="12">
+                      <v-text-field label="密码*" v-model="registerForm.inputPassword" required></v-text-field>
+                    </v-col>
+                  </v-row>
+                  <v-row>
+                    <v-col cols="12" sm="12">
+                      <v-text-field label="昵称*" v-model="registerForm.inputNickName" required></v-text-field>
+                    </v-col>
+                  </v-row>
+                  <v-row>
+                    <v-col cols="12" sm="12">
+                      <v-text-field label="特长*" v-model="registerForm.inputSignature" required></v-text-field>
+                    </v-col>
+                  </v-row>
+                  <v-row>
+                    <v-col cols="12" sm="6">
+                      <v-btn color="primary" block v-on:click="register()">注册</v-btn>
+                    </v-col>
+                    <v-col cols="12" sm="6">
+                      <v-btn color="primary" block v-on:click="registerForm.showDialog = false">取消</v-btn>
+                    </v-col>
+                  </v-row>
+                </v-container>
+              </v-card-text>
+            </v-card>
+          </v-dialog>
+        </v-row>
       </v-content>
     </v-app>
   </div>
@@ -178,6 +220,13 @@
           showLoginDialog: false,
           inputUsername: "",
           inputPassword: "",
+        },
+        registerForm: {
+          showDialog: false,
+          inputUsername: "",
+          inputPassword: "",
+          inputNickName: "",
+          inputSignature: "",
         },
         user: {
           // name: 'test',
@@ -255,6 +304,27 @@
             }
           })
         },
+        register(){
+          $.ajax({
+            url: 'register',
+            type: 'post',
+            contentType: 'application/json',
+            data: JSON.stringify({
+              name: app.registerForm.inputUsername,
+              password: app.registerForm.inputPassword,
+              nickName: app.registerForm.inputNickName,
+              signature: app.registerForm.inputSignature,
+            }),
+            success: function(data, status) {
+              if (!data.ok) {
+                alert('注册失败! ' + data.reason);
+                return;
+              }
+              app.registerForm.showDialog = false;
+              app.login.showLoginDialog = true;
+            }
+          })
+        },
         logout() {
           console.log("logout");
           app.login.isLogin = false;
@@ -263,10 +333,10 @@
             url: 'logout',
             type: 'get',
             success: function(body, status) {
-              if(body.ok)
-              window.location.reload();
+              if(body.ok)//注销成功
+                window.location.reload();
               else
-                alert(body.reason);
+                alert(body.reason)
             }
           });
         },
@@ -368,9 +438,9 @@
             url: "channel",
             success: function(body, status) {
               if(body.ok)
-              app.channels = body.data;
+                app.channels = body.data;
               else
-                alert(body.reason);
+                alert(body.reason)
             }
           })
         }

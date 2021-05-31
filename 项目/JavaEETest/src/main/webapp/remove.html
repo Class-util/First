@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>删除用户</title>
+</head>
+<script src="jquery-1.9.1.min.js"></script>
+<script>
+    function mysub(){
+        var username = jQuery("#username");
+        //非空效验
+        if(username.val().trim() == ""){
+            alert("请输入要查询的用户名!");
+            username.focus();
+            return false;
+        }
+        //json与后端交互
+        jQuery.getJSON(
+            "remove",
+            {
+                "username":username.val()
+            },
+            //回调函数
+            function (data) {
+                if(data != null && data.stats != null && data.stats == 1){
+                    alert("删除操作成功");
+                    location.href = "#";
+                }else{
+                    alert("删除失败：" + data.msg);
+                }
+            });
+    }
+</script>
+<body style="margin-top: 70px;text-align: center">
+    <h1>删除用户</h1>
+    输入删除的用户名：<input type="text" name="username" id="username">
+    <p></p>
+    <input type="button" value="删除用户" onclick="mysub()">
+    <p></p>
+    <a href="reg.html">没有账号？点击注册</a>
+    <p></p>
+    <a href="login.html">已有账户？直接登录</a>
+    <p></p>
+    <a href="search.html">查询用户</a>
+</body>
+</html>
