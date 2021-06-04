@@ -1,0 +1,43 @@
+package Demo14;
+
+import java.util.Arrays;
+
+/**
+ * Created with IntelliJ IDEA.
+ * Description:
+ * User:吴博
+ * Date:2021 06 04
+ * Time:14:22
+ */
+public class Test05 {
+    public static void main(String[] args) {
+        int[] arr = {1,7,3,5,9,4,8};
+        int ret = lengthOfLIS(arr);
+        System.out.println(ret);
+    }
+    //最长升序子序列
+    public static int lengthOfLIS(int[] nums) {
+        //dp数组用来记录当前元素的最长子序列的长度，也就是对于这个元素来说，算上它本身，在他之前有多少个小于它的数
+        int[] dp = new int[nums.length];
+        dp[0] = 1;
+        int max = 1;
+        for(int i = 1; i < nums.length; i++){
+            //将所有的dp元素初始化为1，代表着每个元素都是一个升序序列，长度为自身1
+            dp[i] = 1;
+            //从i-1开始往回判断，如果遇到比i位置的元素小的数值，则改变dp数组
+            for(int j = i - 1; j >= 0; j--){
+                //因为在该位置遇到比i位置元素小的数，所以说明i位置的升序长度应该是i-1位置升序长度+1
+                //因为判断是否是最大值，所以每次比较当前和dp[j]+1的值，取大的赋值到当前的dp数组，得到的就是i位置的最长升序子序列的长度
+                if(nums[i] > nums[j]){
+                    dp[i] = Math.max(dp[i],dp[j] + 1);
+                }
+            }
+            //max是全局记录dp数组最大值的
+            if(max < dp[i]){
+                max = dp[i];
+            }
+        }
+        System.out.println(Arrays.toString(dp));
+        return max;
+    }
+}
