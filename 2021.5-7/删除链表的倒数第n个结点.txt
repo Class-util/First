@@ -1,0 +1,57 @@
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode() {}
+ *     ListNode(int val) { this.val = val; }
+ *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+ * }
+ */
+class Solution {
+    public ListNode removeNthFromEnd(ListNode head, int n) {
+        //如果只有一个结点，那么只可能删除这一个，删完后什么都没有，直接返回null
+        if(head.next == null){
+            return null;
+        }
+        int size = size(head);
+        ListNode cur = head;
+        //如果n==size，说明要删除第一个，直接将头指向他下一个即可
+        if(size == n){
+            head = head.next;
+            return head;
+        }
+        //如果n==0，说明要删除最后一个元素，找到最后一个元素的前驱也就是size-1的位置，修改其next域为null
+        if(n == 0){
+            int count = 0;
+            while(cur != null){
+                if(count == size - 1){
+                    cur.next = null;
+                }
+                cur = cur.next;
+                count++;
+            }
+            return head;
+        }
+        //如果上述条件都不满足，则说明要删除的元素在中间，找到其前驱size-n-1的位置去修改其next域
+        int sign = 0;
+        while(cur != null){
+            if(sign == size - n - 1){
+                cur.next = cur.next.next;
+            }
+            cur = cur.next;
+            sign++;
+        }
+        return head;
+    }
+    //计算链表长度
+    public static int size(ListNode head){
+        ListNode cur = head;
+        int count = 0;
+        while(cur != null){
+            cur = cur.next;
+            count++;
+        }
+        return count;
+    }
+}
