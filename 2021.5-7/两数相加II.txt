@@ -1,0 +1,54 @@
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode() {}
+ *     ListNode(int val) { this.val = val; }
+ *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+ * }
+ */
+class Solution {
+    public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
+        Stack<Integer> s1 = new Stack<>();
+        Stack<Integer> s2 = new Stack<>();
+        //用栈存储
+        while(l1 != null){
+            s1.push(l1.val);
+            l1 = l1.next;
+        }
+        while(l2 != null){
+            s2.push(l2.val);
+            l2 = l2.next;
+        }
+        ListNode prev = new ListNode(0);
+        ListNode cur = prev;
+        int num = 0;
+        while(!s1.isEmpty() || !s2.isEmpty()){
+            int x = s1.isEmpty() ? 0 : s1.pop();
+            int y = s2.isEmpty() ? 0 : s2.pop();
+            int sum = x + y + num;
+            num = sum / 10;
+            sum = sum % 10;
+            cur.next = new ListNode(sum);
+            cur = cur.next;
+        }
+        //判断最后一位是否进位
+        if(num == 1){
+            cur.next = new ListNode(1);
+        }
+        //修改prev的next
+        ListNode tmp = prev.next;
+        ListNode tmpNext = null;
+        ListNode newPrev = null;
+        prev.next = null;
+        //反转链表
+        while(tmp != null){
+            tmpNext = tmp.next;
+            tmp.next = newPrev;
+            newPrev = tmp;
+            tmp = tmpNext;
+        }
+        return newPrev;
+    }
+}
