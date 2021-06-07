@@ -1,0 +1,51 @@
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode() {}
+ *     ListNode(int val) { this.val = val; }
+ *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+ * }
+ */
+class Solution {
+    public ListNode rotateRight(ListNode head, int k) {
+        //如果为空或者k<0不用旋转，直接返回null
+        if(head == null || k < 0)
+        return null;
+        //只有一个结点，直接返回即可
+        if(head.next == null)
+        return head;
+        //如果k==0说明不用旋转，按原样返回即可
+        if(k == 0)
+        return head;
+        //定义快慢指针来找到需要旋转的两个位置
+        ListNode fast = head;
+        ListNode slow = head;
+        while(k != 0){
+            //没走到最后一个则继续往下走
+            if(fast.next != null){
+                fast = fast.next;
+                k--;
+            }else{
+                //走到最后一个但k不为0，则从head在继续走
+                fast = head;
+                k--;
+            }
+        }
+        while(fast.next != null){
+            fast = fast.next;
+            slow = slow.next;
+        }
+        //执行至此，slow指向新链表的尾，slow.next为新头，fast指向需要拼接的地方
+        //如果二者重合，说明旋转之后与原来相同，返回head
+        if(fast == slow){
+            return head;
+        }
+        //将链表拼接
+        ListNode newHead = slow.next;
+        fast.next = head;
+        slow.next = null;
+        return newHead;
+    }
+}
