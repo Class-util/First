@@ -1,0 +1,53 @@
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode() {}
+ *     ListNode(int val) { this.val = val; }
+ *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+ * }
+ */
+class Solution {
+    public ListNode swapPairs(ListNode head) {
+        //如果链表为空，或者链表只有一个结点，直接返回头部即可
+        if(head == null || head.next == null){
+            return head;
+        }
+        //定义前驱
+        ListNode prev = head;
+        ListNode cur = head.next;
+        ListNode cNext = cur.next;
+        //存储新头，结点数量超过1，则新头肯定在第二个结点也就是当前cur的位置
+        ListNode newHead = cur;
+        //定义标识符，用于技术结点最后一位的赋值
+        int i = 0;
+        while(cur.next != null){
+            //第二个结点的next域指向第一个结点
+            cur.next = prev;
+            //第一个节点的next域，应该指向下一组两个结点的第二个位置，也就cNext.next
+            prev.next = cNext.next;
+            //判断如果cNext.next == null；说明链表结点个数为奇数个，所以会剩下一个，这时直接跳出循环就好，不然会有空指针异常
+            if(cNext.next == null){
+                //标识是奇数位情况的退出
+                i = 1;
+                break;
+            }
+            //移动prev指针，到下一组结点的第一个位置
+            prev = cNext;
+            //移动cur 指针到下一组结点的第二个位置
+            cur = cNext.next;
+            //移动cNext指针
+            cNext = cur.next;
+        }
+        if(i == 1){
+            //如果是奇数情况，则只需将倒数第二个结点的next域指向最后一个结点，也就是prev的next域指向cNext
+            prev.next = cNext;
+        }else{
+            //偶数位退出循环的情况，需要手动拼接最后一组结点，并将最后一个结点next赋值为null
+            cur.next = prev;
+            prev.next = null;
+        }
+        return newHead;
+    }
+}
