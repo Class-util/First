@@ -1,0 +1,29 @@
+import java.util.*;
+
+public class MaxGap {
+    public int findMaxGap(int[] A, int n) {
+        // write code here
+        int max = Integer.MIN_VALUE;
+        for(int i = 0; i <= n - 2; i++){
+            //0 - k找最大值
+            int left = findMax(A, 0, i);
+            //k+1 - n-2找最大值
+            int right = findMax(A, i+1, n-1);
+            int num = Math.abs(left - right);
+            if(num > max){
+                max = num;
+            }
+        }
+        return max;
+    }
+    //数组寻找最大值
+    public static int findMax(int[] arr,int start,int end){
+        int max = Integer.MIN_VALUE;
+        for(int i = start; i <= end; i++){
+            if(arr[i] > max){
+                max = arr[i];
+            }
+        }
+        return max;
+    }
+}

@@ -1,0 +1,44 @@
+import java.util.*;
+
+public class Printer {
+    public int[] clockwisePrint(int[][] mat, int n, int m) {
+        int[] ret = new int[n*m];
+        int flog = 0;
+        // write code here
+        int frow = 0;
+        int lrow = m - 1;
+        int fcol = 0;
+        int lcol = n - 1;
+        while(frow <= lrow && fcol <= lcol){
+            //打印第一行
+            if(frow <= lrow){
+                for(int i = frow; i <= lrow; i++){
+                    ret[flog++] = mat[fcol][i];
+                }
+            }
+            //打印最后一列
+            if(fcol < lcol){
+                for(int j = fcol + 1; j <= lcol; j++){
+                    ret[flog++] = mat[j][lrow];
+                }
+            }
+            //打印最后一行
+            if(frow < lrow && lcol > fcol){
+                for(int k = lrow - 1; k >= frow; k--){
+                    ret[flog++] = mat[lcol][k];
+                }
+            }
+            //打印第一列
+            if(fcol < lcol && lrow > frow){
+                for(int o = lcol - 1; o >= fcol + 1; o--){
+                    ret[flog++] = mat[o][frow];
+                }
+            }
+            frow++;
+            lrow--;
+            fcol++;
+            lcol--;
+        }
+        return ret;
+    }
+}
