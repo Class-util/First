@@ -1,0 +1,48 @@
+class MyStack {
+
+    /** Initialize your data structure here. */
+    //输入队列
+    private Queue<Integer> qu1;
+    //输出队列
+    private Queue<Integer> qu2;
+    public MyStack() {
+        qu1 = new LinkedList<>();
+        qu2 = new LinkedList<>();
+    }
+    
+    /** Push element x onto stack. */
+    public void push(int x) {
+        qu1.offer(x);
+        while(!qu2.isEmpty()){
+            qu1.offer(qu2.poll());
+        }
+        //交换qu1和qu2，保证栈的性质
+        Queue tmp = qu1;
+        qu1 = qu2;
+        qu2 = tmp;
+    }
+    
+    /** Removes the element on top of the stack and returns that element. */
+    public int pop() {
+        return qu2.poll();
+    }
+    
+    /** Get the top element. */
+    public int top() {
+        return  qu2.peek();
+    }
+    
+    /** Returns whether the stack is empty. */
+    public boolean empty() {
+        return qu2.isEmpty();
+    }
+}
+
+/**
+ * Your MyStack object will be instantiated and called as such:
+ * MyStack obj = new MyStack();
+ * obj.push(x);
+ * int param_2 = obj.pop();
+ * int param_3 = obj.top();
+ * boolean param_4 = obj.empty();
+ */

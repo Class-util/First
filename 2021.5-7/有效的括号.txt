@@ -1,0 +1,33 @@
+class Solution {
+    public boolean isValid(String s) {
+        //奇数情况直接返回false
+        int len = s.length();
+        if(len % 2 != 0){
+            return false;
+        }
+        //偶数的情况，创建两个栈
+        Stack<Character> left = new Stack<>();
+
+        for(int i = 0; i < len; i++){
+            Character ch = s.charAt(i);
+            //只存储左括号
+            if(ch == '(' || ch == '[' || ch == '{'){
+                left.push(ch);
+            }else{
+                //如果遇到的不是左括号，则判断栈是否为空，不为空则出栈，看最近的左括号是否与遇到的右括号匹配
+                if(left.isEmpty()){
+                    return false;
+                }
+                char topch = left.peek();
+                if(topch == '{' && ch == '}' || 
+                topch == '(' && ch == ')' || 
+                topch == '[' && ch == ']'){
+                    left.pop();
+                }else {
+                    return false;
+                }
+            }
+        }
+        return left.isEmpty();
+    }
+}
