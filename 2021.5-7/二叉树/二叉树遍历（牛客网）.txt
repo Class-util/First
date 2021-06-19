@@ -1,0 +1,19 @@
+import java.util.*;
+public class Main{
+    public static void main(String[] args){
+        Scanner sc = new Scanner(System.in);
+        while(sc.hasNext()){
+            char[] ch = sc.nextLine().toCharArray();
+            Stack<Character> stack = new Stack<>();
+            stack.push(ch[0]);
+            for(int i = 1; i < ch.length - 1; i++){
+                if(ch[i] == '#'){
+                    System.out.print(stack.pop() + " ");
+                }else{
+                    stack.push(ch[i]);
+                }
+            }
+            System.out.println();
+        }
+    }
+}
