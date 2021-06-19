@@ -1,0 +1,35 @@
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode() {}
+ *     TreeNode(int val) { this.val = val; }
+ *     TreeNode(int val, TreeNode left, TreeNode right) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
+ * }
+ */
+class Solution {
+    public List<Integer> inorderTraversal(TreeNode root) {
+        List<Integer> list = new ArrayList<>();
+        Stack<TreeNode> stack = new Stack<>();
+        while(root != null || !stack.isEmpty()){
+            //从该节点一路向下走，走到最左，一路存储左节点
+            while(root != null){
+                stack.push(root);
+                root = root.left;
+            }
+            //代码执行至此，说明root当前为null，但他的上一个结点不为空，也就是现在的栈顶元素
+            //取栈顶元素，因为左边上面的代码已经走完了，现在开始走该结点的右边
+            root = stack.pop();
+            list.add(root .val);
+            //结点往右走，走到循环时，继续往左走，因为要实现中序遍历，先左后右
+            root = root.right;
+        }
+        return list;
+    }
+}

@@ -1,0 +1,45 @@
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode() {}
+ *     TreeNode(int val) { this.val = val; }
+ *     TreeNode(int val, TreeNode left, TreeNode right) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
+ * }
+ */
+class Solution {
+    public List<Integer> postorderTraversal(TreeNode root) {
+        List<Integer> list = new ArrayList<>();
+        Stack<TreeNode> stack = new Stack<>();
+        TreeNode prev = null;
+        while(root != null || !stack.isEmpty()){
+            //走到当前结点的最左边
+            while(root != null){
+                stack.push(root);
+                root = root.left;
+            }
+            //左边走完后此时root为null，判断上一个结点是否有右节点，并判断这个结点的右节点是否已经存储过
+            root = stack.pop();
+            //右节点为空，或者已经存储过了，就可以打印当前节点
+            if(root.right == null || prev == root.right){
+                list.add(root.val);
+                //将前驱置位当前结点，用来判断下一个栈顶元素是否需要走右边
+                prev = root;
+                //进入这个分支说明没有右节点，所以需要将root置空，让他不往当前节点的左边走了，如果不这样做会造成死循环
+                root = null;
+            }else{
+                //说明当前节点有右节点，将这个结点再次压入栈，现在还有有到打印他的时候
+                stack.push(root);
+                //将root往右走
+                root = root.right;
+            }
+        }
+        return list;
+    }
+}
