@@ -1,0 +1,38 @@
+class Solution {
+    public String convert(String s, int numRows) {
+        StringBuilder ret = new StringBuilder();
+        if(numRows == 1){
+            return s;
+        }
+        //记录下标
+        int index = 2 * numRows - 2;
+        //控制行数循环
+        for(int i = 0; i < numRows; i++){
+            //第0行,相当于每次走行数的k倍
+            if(i == 0){
+                for(int j = 0; j * index < s.length(); j++){
+                    ret.append(s.charAt(j * index));
+                }
+            }else{
+                //最后一行，numRows - 1
+                if(i == numRows - 1){
+                    for(int j = 0; j * index + numRows - 1 < s.length(); j++){
+                        //j*index找到的是当前列的第一行，在加上numRows - 1就是该列的最后一行
+                        ret.append(s.charAt(j * index + numRows - 1));
+                    }
+                }else{
+                    //中间行
+                    for(int j = 0; j * index + i < s.length(); j++){
+                        //j * idnex找到的是当前列的第一行，加i表示往下走几行，添加的是中间的元素
+                        ret.append(s.charAt(j * index + i));
+                        if((j + 1) * index - i < s.length()){
+                            //中间拐弯部分的值，下一中间行的值于这个拐弯处的值差当前的行数
+                            ret.append(s.charAt((j + 1) * index - i));
+                        }
+                    }
+                }
+            }
+        }
+        return ret.toString();
+    }
+}
