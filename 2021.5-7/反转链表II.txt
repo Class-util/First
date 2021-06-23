@@ -1,0 +1,59 @@
+
+  Definition for singly-linked list.
+  public class ListNode {
+      int val;
+      ListNode next;
+      ListNode() {}
+      ListNode(int val) { this.val = val; }
+      ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+  }
+ 
+class Solution {
+    public ListNode reverseBetween(ListNode head, int left, int right) {
+        if(head == null  head.next == null){
+            return head;
+        }
+        ListNode newHead = new ListNode(-1);
+        newHead.next = head;
+        ListNode prev = newHead;
+        找到链表反转开头的前驱
+        for(int i = 0; i  left - 1; i++){
+            prev = prev.next;
+        }
+       
+        ListNode cur = prev;
+        找到链表反转的结尾
+        for(int i = 0; i  right - left + 1; i++){
+            cur = cur.next;
+        }
+        链表反转的开头
+         ListNode prevLeft = prev.next;
+        链表反转的结尾该接的原链表位置
+         ListNode rightCur = cur.next;
+
+        对于原链表的部分置空
+        prev.next = null;
+        cur.next = null;
+        reverise(prevLeft);
+        拼接链表
+        原链表前拼接尾
+        prev.next = cur;
+        反转部分链表的尾，赋值原链表尾部
+        prevLeft.next = rightCur;
+        
+        return newHead.next;
+
+    }
+    链表反转
+    public static void reverise(ListNode head){
+        ListNode prev = null;
+        ListNode cur = head;
+        ListNode curNext = null;
+        while(cur != null  curNext != null){
+            curNext = cur.next;
+            cur.next = prev;
+            prev = cur;
+            cur = curNext;
+        }
+    }
+}
