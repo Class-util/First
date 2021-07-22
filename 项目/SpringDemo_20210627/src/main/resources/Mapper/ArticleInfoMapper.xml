@@ -69,6 +69,15 @@
         where id = #{id}
     </update>
 
+    <update id="upArticleById">
+        update articleinfo
+        <set>
+            title = #{title},
+            content = #{content}
+        </set>
+        where id = #{id}
+    </update>
+
     <delete id="delArticleByIds">
         delete from articleinfo where id in
         <foreach collection="ids" item="item" open="(" close=")" separator=",">

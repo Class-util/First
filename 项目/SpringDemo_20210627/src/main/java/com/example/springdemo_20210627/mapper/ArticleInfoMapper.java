@@ -32,4 +32,6 @@ public interface ArticleInfoMapper {
     public ArticleInfo detail(int id);
 
     public int add(ArticleInfo articleInfo);
+
+    public int upArticleById(ArticleInfo articleInfo);
 }

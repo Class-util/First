@@ -25,6 +25,26 @@ public class ArticleInfoController {
     @Resource
     private ArticleInfoMapper articleInfoMapper;
 
+    @RequestMapping("/update")
+    public ArticleInfo updateById(@RequestParam int id ,
+                                  @RequestParam String title,
+                                  @RequestParam String content,
+                                  HttpServletRequest request){
+        HttpSession session = request.getSession(false);
+        if(session == null || session.getAttribute("user") == null){
+            return null;
+        }
+        Object user = session.getAttribute("user");
+        User u = (User) user;
+        ArticleInfo articleInfo = new ArticleInfo();
+        articleInfo.setTitle(title);
+        articleInfo.setContent(content);
+        articleInfo.setId(id);
+        articleInfo.setUid(u.getId());
+        articleInfoMapper.upArticleById(articleInfo);
+        return articleInfo;
+    }
+
     @RequestMapping("/del")
     public int deleteBuId (@RequestParam int id){
         return articleInfoMapper.delArticleById(id);
