@@ -1,0 +1,19 @@
+public class Solution {
+    public int MoreThanHalfNum_Solution(int [] array) {
+        int len = array.length;
+        int flog = len / 2;
+        int i = 0;
+        for(; i < len; i++){
+            int count = 0;
+            for(int j = 0; j < len; j++){
+                if(array[i] == array[j]){
+                    count++;
+                }
+            }
+            if(count > flog){
+                break;
+            }
+        }
+        return array[i];
+    }
+}

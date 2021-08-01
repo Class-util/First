@@ -1,0 +1,33 @@
+import java.util.*;
+public class Main{
+    public static void main(String[] args){
+        Scanner sc = new Scanner(System.in);
+        while(sc.hasNext()){
+            //读取目标字符串
+            String str = sc.nextLine();
+            //定义最大值计数器
+            int max = 0;
+            //定义标志位
+            int flog = 0;
+            //定义最长数字串的开始位置
+            int start = 0;
+            int end = 0;
+            for(int i = 0; i < str.length(); i++){
+                //遇到0-9的数字flog++，否则flog置为0
+                if(str.charAt(i) >= '0' && str.charAt(i) <= '9'){
+                    flog++;
+                    //当前字符如果不为数字，则首先比较max和flog的大小，然后清零flog
+                    if(flog > max){
+                        max = flog;
+
+                        end = i;
+                        start = end - max + 1;
+                    }
+                }else{
+                        flog = 0;
+                }
+            }
+            System.out.println(str.substring(start,end + 1));
+        }
+    }
+}
