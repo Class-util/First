@@ -1,0 +1,30 @@
+import java.util.*;
+public class Main{
+    public static void main(String[] args){
+        Scanner sc = new Scanner(System.in);
+        while(sc.hasNext()){
+            int n = sc.nextInt();
+            Queue<Integer> queue = new LinkedList<>();
+            //向队列中存值
+            for(int i = 0; i < n; i++){
+                queue.offer(i);
+            }
+            int count = 0;
+            //只需要得到队列长度为1的情况
+            while(queue.size() != 1){
+                //计数器不为2，则取出队首的元素，在添加到队尾
+                if(count != 2){
+                    int num = queue.poll();
+                    queue.offer(num);
+                    count++;
+                }else{
+                    //计数器为2，则需要删除当前元素
+                    queue.poll();
+                    //并将计数器置位0
+                    count = 0;
+                }
+            }
+            System.out.println(queue.peek());
+        }
+    }
+}

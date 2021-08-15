@@ -1,0 +1,43 @@
+import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.PriorityQueue;
+
+public class Main{
+    public static void main(String[] args){
+        Scanner sc = new Scanner(System.in);
+        List<Integer> list = new ArrayList<>();
+        //得到数据集合
+        while(sc.hasNextInt()){
+            list.add(sc.nextInt());
+        }
+        //建立大堆
+        int k = list.get(list.size() - 1);
+        PriorityQueue<Integer> maxHeap = new PriorityQueue<>(k,((o1, o2) -> o2-o1));
+        for (int i = 0; i < list.size() - 1; i++) {
+            if(maxHeap.size() < k){
+                maxHeap.offer(list.get(i));
+              }else {
+                Integer top = maxHeap.peek();
+                if(top != null){
+                    if(list.get(i) < top){
+                        maxHeap.poll();
+                        maxHeap.offer(list.get(i));
+                    }
+                }
+             }
+         }
+        ArrayList<Integer> arr = new ArrayList<>();
+        while (!maxHeap.isEmpty()){
+            arr.add(maxHeap.poll());
+            }
+        arr.sort((o1, o2) -> o1-o2);
+        for (int i = 0; i < arr.size(); i++) {
+            if(i == arr.size() - 1){
+                System.out.print(arr.get(i));
+            }else {
+                System.out.print(arr.get(i) + " ");
+            }
+        }
+     }
+}

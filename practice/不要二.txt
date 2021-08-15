@@ -1,0 +1,35 @@
+import java.util.Scanner;
+public class Main{
+    public static void main(String[] args){
+        Scanner sc = new Scanner(System.in);
+        while(sc.hasNext()){
+            int w = sc.nextInt();
+            int h = sc.nextInt();
+            int[][] arr = new int[h][w];
+            for(int i = 0; i < h; i++){
+                if(i % 4 == 0 || i % 4 == 1){
+                    for(int j = 0; j < w; j++){
+                        if(j % 4 == 0 || j % 4 == 1){
+                            arr[i][j] = 1;
+                        }
+                    }
+                }else{
+                    for(int j = 0; j < w; j++){
+                        if(j % 4 == 2 || j % 4 == 3){
+                            arr[i][j] = 1;
+                        }
+                    }
+                }
+            }
+            int count = 0;
+            for(int i = 0; i < h; i++){
+                for(int j = 0; j < w; j++){
+                    if(arr[i][j] == 1){
+                        count++;
+                    }
+                }
+            }
+            System.out.println(count);
+        }
+    }
+}

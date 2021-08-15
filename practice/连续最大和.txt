@@ -1,0 +1,21 @@
+import java.util.*;
+public class Main{
+    public static void main(String[] args){
+        Scanner sc = new Scanner(System.in);
+        while(sc.hasNext()){
+            int len = sc.nextInt();
+            int[] arr = new int[len];
+            for(int i = 0; i < len; i++){
+                arr[i] = sc.nextInt();
+            }
+            int sum = 0;
+            int max = Integer.MIN_VALUE;
+            for(int i = 0; i < len; i++){
+                //如果sum加上当前下标的数，比当前下标的数还小了，则需要从这个数重新计算起
+                sum = Math.max(sum + arr[i],arr[i]);
+                max = Math.max(max,sum);
+            }
+            System.out.println(max);
+        }
+    }
+}
