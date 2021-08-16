@@ -1,0 +1,38 @@
+<<<<<<< HEAD
+import java.util.*;
+public class Main{
+    public static void main(String[] args){
+        Scanner sc = new Scanner(System.in);
+        while(sc.hasNext()){
+            int num = sc.nextInt();
+            /*StringBuilder sb = new StringBuilder(num + "");
+            sb.reverse();
+            System.out.println(sb);*/
+            StringBuilder sb = new StringBuilder();
+            while(num > 0){
+                sb.append(num % 10);
+                num = num / 10;
+            }
+            System.out.println(sb);
+        }
+    }
+=======
+import java.util.*;
+public class Main{
+    public static void main(String[] args){
+        Scanner sc = new Scanner(System.in);
+        while(sc.hasNext()){
+            int num = sc.nextInt();
+            /*StringBuilder sb = new StringBuilder(num + "");
+            sb.reverse();
+            System.out.println(sb);*/
+            StringBuilder sb = new StringBuilder();
+            while(num > 0){
+                sb.append(num % 10);
+                num = num / 10;
+            }
+            System.out.println(sb);
+        }
+    }
+>>>>>>> 5d2a27e62241c4a1fd1d1a477c9f7f617a76c997
+}

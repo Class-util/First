@@ -1,0 +1,42 @@
+<<<<<<< HEAD
+import java.util.*;
+public class Main{
+    public static void main(String[] args){
+        Scanner sc = new Scanner(System.in);
+        while(sc.hasNext()){
+            int num = sc.nextInt();
+            int count = 0;
+            //思路：首先暴力解题是行不通的，因为求的是阶乘
+            //能得到0，就说明阶乘中，含有偶数和5
+            //所以转换思路：求阶乘数中有多少个5
+            //方法：用当前数字除以5，看其包含多少个5
+            //然后得到除以5的商，相当于跳过了n个5，再去判断，这样就不拍重复计算了
+            while(num > 0){
+                count += num / 5;
+                num = num / 5;
+            }
+            System.out.println(count);
+        }
+    }
+=======
+import java.util.*;
+public class Main{
+    public static void main(String[] args){
+        Scanner sc = new Scanner(System.in);
+        while(sc.hasNext()){
+            int num = sc.nextInt();
+            int count = 0;
+            //思路：首先暴力解题是行不通的，因为求的是阶乘
+            //能得到0，就说明阶乘中，含有偶数和5
+            //所以转换思路：求阶乘数中有多少个5
+            //方法：用当前数字除以5，看其包含多少个5
+            //然后得到除以5的商，相当于跳过了n个5，再去判断，这样就不拍重复计算了
+            while(num > 0){
+                count += num / 5;
+                num = num / 5;
+            }
+            System.out.println(count);
+        }
+    }
+>>>>>>> 5d2a27e62241c4a1fd1d1a477c9f7f617a76c997
+}
